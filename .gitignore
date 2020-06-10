@@ -19,6 +19,8 @@ test/list
 # examples
 example/basic
 
+platform/mac-cocoa/simple
+
 
 # tags
 tags
