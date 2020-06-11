@@ -2,10 +2,12 @@
 
 #import "qui.h"
 #import "private.h"
+#import "QUIApplication.h"
 
 struct app {
     NSAutoreleasePool *_pool;
     NSApplication *_app;
+    QUIApplicationDelegate *_delegate;
 };
 
 struct app *app_new()
@@ -15,24 +17,20 @@ struct app *app_new()
         qui_die("out of memory");
 
     appref->_pool = [NSAutoreleasePool new];
-    appref->_app = [NSApplication sharedApplication];
-
-    // give us a menubar and display app in dock
-    [appref->_app setActivationPolicy:NSApplicationActivationPolicyRegular];
+    appref->_app = [QUIApplication sharedApplication];
+    appref->_delegate = [QUIApplicationDelegate new];
+    [appref->_app setDelegate:appref->_delegate];
 
     return appref;
 }
 
 void app_run(struct app *a)
 {
-    // activate and run the main event loop
-    [a->_app activateIgnoringOtherApps:YES];
     [a->_app run];
 }
 
 void app_cleanup(struct app *a)
 {
-    // cleanup
     [a->_app release];
     [a->_pool release];
 }
@@ -90,6 +88,7 @@ int __app_default_window(struct app *a)
 
     [win center];
     [win makeKeyAndOrderFront:nil];
+    [win makeMainWindow];
 
     return 1;
 }

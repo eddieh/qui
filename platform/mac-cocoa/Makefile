@@ -16,6 +16,7 @@ DFRAME_LOCAL_CONFIG ?= local.mk
 
 LIB_OBJS :=
 LIB_OBJS += main.o
+LIB_OBJS += QUIApplication.o
 LIB_OBJS += app.o
 
 TESTS :=
