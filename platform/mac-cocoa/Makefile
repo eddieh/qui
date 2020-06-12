@@ -18,6 +18,7 @@ LIB_OBJS :=
 LIB_OBJS += main.o
 LIB_OBJS += QUIApplication.o
 LIB_OBJS += app.o
+LIB_OBJS += window.o
 
 TESTS :=
 

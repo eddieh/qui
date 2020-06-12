@@ -27,9 +27,14 @@ TESTS += test/list
 
 EXAMPLES :=
 EXAMPLES += example/basic
+EXAMPLES += example/window
 
 PROGRAMS :=
 PROGRAMS += $(TESTS) $(EXAMPLES)
+
+MODULES :=
+
+PLATFORM_PATH ?=
 
 all:
 
@@ -39,10 +44,11 @@ cflags += -I.
 
 OSNAME := $(shell uname)
 ifeq ($(OSNAME),Darwin)
+PLATFORM_PATH = platform/mac-cocoa
 ldflags += -framework Cocoa
-ldflags += -Lplatform/mac-cocoa
-LIBS += platform/mac-cocoa/libqui-mac-cocoa.a
-# TODO: recursive make libqui-mac-cocoa.a
+ldflags += -L$(PLATFORM_PATH)
+LIBS += $(PLATFORM_PATH)/libqui-mac-cocoa.a
+MODULES += $(PLATFORM_PATH)
 else
 $(error Your OS is not supported yet)
 endif
@@ -54,7 +60,11 @@ OBJS := $(LIB_OBJS) $(EXTRA_OBJS) $(PROGRAMS:%=%.o)
 V := @
 Q := $(V:1=)
 
-all: $(PROGRAMS)
+all: submodules $(PROGRAMS)
+
+submodules:
+	@for dir in $(MODULES); do ${MAKE} all -C $$dir; exit_status=$$?; \
+	if [ $$exit_status -ne 0 ]; then exit $$exit_status; fi; done
 
 ldflags += $($(@)-ldflags) $(LDFLAGS)
 ldlibs += $($(@)-ldlibs)  $(LDLIBS)
@@ -75,3 +85,5 @@ cflags += $($(*)-cflags) $(CPPFLAGS) $(CFLAGS)
 clean:
 	@echo "  CLEAN"
 	@rm -f *.[oa] .*.d $(PROGRAMS)
+
+.PHONY: submodules

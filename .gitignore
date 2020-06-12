@@ -18,6 +18,7 @@ test/list
 
 # examples
 example/basic
+example/window
 
 platform/mac-cocoa/simple
 

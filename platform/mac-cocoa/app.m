@@ -26,6 +26,13 @@ struct app *app_new()
 
 void app_run(struct app *a)
 {
+    // mac?
+    if (!app_has_main_menu(a))
+        __app_default_menu(a);
+
+    if (!app_has_main_window(a))
+        __app_default_window(a);
+
     [a->_app run];
 }
 
@@ -33,6 +40,16 @@ void app_cleanup(struct app *a)
 {
     [a->_app release];
     [a->_pool release];
+}
+
+int app_has_main_menu(struct app *a)
+{
+    return !![a->_app mainMenu];
+}
+
+int app_has_main_window(struct app *a)
+{
+    return !![[a->_app windows] count];
 }
 
 int __app_default_init(struct app *a)
