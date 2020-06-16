@@ -6,7 +6,7 @@ void draw(struct context *ctx, struct QuRect dirty)
     fill(ctx, rect(0, 0, 200, 100));
 }
 
-int app_init_cb(struct app *a)
+int app_init_cb(QuApp *app)
 {
     struct window *win = window_new();
     window_draw_func(win, draw);

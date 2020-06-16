@@ -12,6 +12,6 @@
 
 
 int qui_main(int argc, char **argv);
-int qui_main_init(int argc, char **argv, int (*init)(struct app *));
+int qui_main_init(int argc, char **argv, int (*init)(QuApp *));
 
 #endif /* QUI_H */

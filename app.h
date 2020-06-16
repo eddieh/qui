@@ -3,15 +3,15 @@
 
 #include "window.h"
 
-struct app;
+typedef struct QuApp QuApp;
 
-struct app *appref;
+QuApp *appref;
 
-struct app *app_new();
-void app_run(struct app *a);
-void app_cleanup(struct app *a);
+QuApp *app_new();
+void app_run(QuApp *app);
+void app_cleanup(QuApp *app);
 
-int app_has_main_menu(struct app *a);
-int app_has_main_window(struct app *a);
+int app_has_main_menu(QuApp *app);
+int app_has_main_window(QuApp *app);
 
 #endif /* APP_H */

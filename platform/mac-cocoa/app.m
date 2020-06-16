@@ -4,15 +4,15 @@
 #import "private.h"
 #import "QUIApplication.h"
 
-struct app {
+struct QuApp {
     NSAutoreleasePool *_pool;
     NSApplication *_app;
     QUIApplicationDelegate *_delegate;
 };
 
-struct app *app_new()
+QuApp *app_new()
 {
-    appref = malloc(sizeof(struct app));
+    appref = malloc(sizeof(QuApp));
     if (!appref)
         qui_die("out of memory");
 
@@ -24,7 +24,7 @@ struct app *app_new()
     return appref;
 }
 
-void app_run(struct app *a)
+void app_run(QuApp *a)
 {
     // mac?
     if (!app_has_main_menu(a))
@@ -36,23 +36,23 @@ void app_run(struct app *a)
     [a->_app run];
 }
 
-void app_cleanup(struct app *a)
+void app_cleanup(QuApp *a)
 {
     [a->_app release];
     [a->_pool release];
 }
 
-int app_has_main_menu(struct app *a)
+int app_has_main_menu(QuApp *a)
 {
     return !![a->_app mainMenu];
 }
 
-int app_has_main_window(struct app *a)
+int app_has_main_window(QuApp *a)
 {
     return !![[a->_app windows] count];
 }
 
-int __app_default_init(struct app *a)
+int __app_default_init(QuApp *a)
 {
     if (!__app_default_menu(a))
         qui_die("failed to init default menu");
@@ -63,7 +63,7 @@ int __app_default_init(struct app *a)
     return 1;
 }
 
-int __app_default_menu(struct app *a)
+int __app_default_menu(QuApp *a)
 {
     NSMenu *menubar, *appMenu;
     NSMenuItem *appMenuItem, *quitMenuItem;
@@ -86,7 +86,7 @@ int __app_default_menu(struct app *a)
     return 1;
 }
 
-int __app_default_window(struct app *a)
+int __app_default_window(QuApp *a)
 {
     NSRect rect;
     NSWindowStyleMask style;

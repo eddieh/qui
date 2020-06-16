@@ -1,6 +1,6 @@
 #include "qui.h"
 
-int app_init_cb(struct app *a)
+int app_init_cb(QuApp *app)
 {
     struct window *win = window_new();
     window_show(win);
