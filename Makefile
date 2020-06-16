@@ -28,6 +28,7 @@ TESTS += test/list
 EXAMPLES :=
 EXAMPLES += example/basic
 EXAMPLES += example/window
+EXAMPLES += example/draw
 
 PROGRAMS :=
 PROGRAMS += $(TESTS) $(EXAMPLES)
@@ -83,7 +84,10 @@ cflags += $($(*)-cflags) $(CPPFLAGS) $(CFLAGS)
 	$(Q)$(CC) $(cflags) -c -o $@ $<
 
 clean:
+	@for dir in $(MODULES); do ${MAKE} clean -C $$dir; exit_status=$$?; \
+	if [ $$exit_status -ne 0 ]; then exit $$exit_status; fi; done
 	@echo "  CLEAN"
 	@rm -f *.[oa] .*.d $(PROGRAMS)
+	@rm -f test/*.[oa] example/*.[oa]
 
-.PHONY: submodules
+.PHONY: submodules clean

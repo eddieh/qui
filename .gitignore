@@ -19,6 +19,7 @@ test/list
 # examples
 example/basic
 example/window
+example/draw
 
 platform/mac-cocoa/simple
 

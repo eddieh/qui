@@ -1,5 +1,5 @@
-#include "qui.h"
-#include "private.h"
+#import "qui.h"
+#import "private.h"
 
 int qui_main(int argc, char **argv)
 {
