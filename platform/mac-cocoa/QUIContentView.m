@@ -1,8 +1,8 @@
 #import "QUIContentView.h"
 
 @interface QUIContentView () {
-    struct context *_context;
-    void (*_drawf)(struct context *, struct QuRect);
+    QuContext *_context;
+    void (*_drawf)(QuContext *, struct QuRect);
 }
 @end
 
@@ -31,7 +31,7 @@
 
 }
 
-- (void)setDrawFunction:(void (*)(struct context *, struct QuRect))df
+- (void)setDrawFunction:(void (*)(QuContext *, struct QuRect))df
 {
     _drawf = df;
 }

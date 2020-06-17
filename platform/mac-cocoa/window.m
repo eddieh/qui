@@ -48,7 +48,7 @@ void window_close(struct window *win)
 }
 
 void window_draw_func(struct window *win,
-    void (*df)(struct context *, struct QuRect))
+    void (*df)(QuContext *, struct QuRect))
 {
     [win->_contentView setDrawFunction:df];
 }

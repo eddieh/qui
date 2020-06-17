@@ -1,6 +1,6 @@
 #include "qui.h"
 
-void draw(struct context *ctx, struct QuRect dirty)
+void draw(QuContext *ctx, struct QuRect dirty)
 {
     fill_color(ctx, rgba(1, 0, 0, 1));
     fill(ctx, rect(0, 0, 200, 100));

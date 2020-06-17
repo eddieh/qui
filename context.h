@@ -4,12 +4,12 @@
 #include "color.h"
 #include "rect.h"
 
-struct context;
+typedef struct QuContext QuContext;
 
-void fill_color(struct context *ctx, struct QuRGBA c);
-void fill(struct context *ctx, struct QuRect r);
+void fill_color(QuContext *ctx, struct QuRGBA c);
+void fill(QuContext *ctx, struct QuRect r);
 
-void stroke_color(struct context *ctx, struct QuRGBA c);
-void stroke(struct context *ctx, struct QuRect r);
+void stroke_color(QuContext *ctx, struct QuRGBA c);
+void stroke(QuContext *ctx, struct QuRect r);
 
 #endif /* CONTEXT_H */

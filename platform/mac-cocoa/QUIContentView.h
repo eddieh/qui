@@ -4,5 +4,5 @@
 #import "private.h"
 
 @interface QUIContentView : NSView
-- (void)setDrawFunction:(void (*)(struct context *, struct QuRect))df;
+- (void)setDrawFunction:(void (*)(QuContext *, struct QuRect))df;
 @end

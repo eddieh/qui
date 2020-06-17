@@ -5,22 +5,22 @@
 #import "qui.h"
 #import "private.h"
 
-struct context {
+struct QuContext {
     CGContextRef _context;
     NSWindow *_window;
     NSView *_view;
 };
 
-struct context *context_new(CGContextRef cg, NSWindow *win, NSView *view)
+QuContext *context_new(CGContextRef cg, NSWindow *win, NSView *view)
 {
-    struct context *ctx = malloc(sizeof(struct context));
+    QuContext *ctx = malloc(sizeof(QuContext));
     ctx->_context = cg;
     ctx->_window = win;
     ctx->_view = view;
     return ctx;
 }
 
-void fill_color(struct context *ctx, struct QuRGBA c)
+void fill_color(QuContext *ctx, struct QuRGBA c)
 {
     CGContextRef cgctx;
     CGColorRef cgc;
@@ -30,7 +30,7 @@ void fill_color(struct context *ctx, struct QuRGBA c)
     CGContextSetFillColorWithColor(cgctx, cgc);
 }
 
-void fill(struct context *ctx, struct QuRect r)
+void fill(QuContext *ctx, struct QuRect r)
 {
     CGContextRef cgctx;
     CGRect cgr;
@@ -40,10 +40,10 @@ void fill(struct context *ctx, struct QuRect r)
     CGContextFillRect(cgctx, cgr);
 }
 
-void stroke_color(struct context *ctx, struct QuRGBA c)
+void stroke_color(QuContext *ctx, struct QuRGBA c)
 {
 }
 
-void stroke(struct context *ctx, struct QuRect r)
+void stroke(QuContext *ctx, struct QuRect r)
 {
 }
