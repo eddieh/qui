@@ -8,7 +8,7 @@ void draw(QuContext *ctx, struct QuRect dirty)
 
 int app_init_cb(QuApp *app)
 {
-    struct window *win = window_new();
+    QuWindow *win = window_new();
     window_draw_func(win, draw);
     window_show(win);
     return 1;

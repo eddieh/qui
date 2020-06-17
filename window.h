@@ -4,14 +4,14 @@
 #include "context.h"
 #include "rect.h"
 
-struct window;
+typedef struct QuWindow QuWindow;
 
-struct window *window_new();
+QuWindow *window_new();
 
-void window_show(struct window *win);
-void window_close(struct window *win);
+void window_show(QuWindow *win);
+void window_close(QuWindow *win);
 
-void window_draw_func(struct window *win,
+void window_draw_func(QuWindow *win,
     void (*df)(QuContext *ctx, struct QuRect));
 
 #endif /* WINDOW_H */

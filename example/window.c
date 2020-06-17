@@ -2,7 +2,7 @@
 
 int app_init_cb(QuApp *app)
 {
-    struct window *win = window_new();
+    QuWindow *win = window_new();
     window_show(win);
     return 1;
 }

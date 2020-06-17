@@ -5,17 +5,17 @@
 
 #import "QUIContentView.h"
 
-struct window {
+struct QuWindow {
     struct list *children;
     NSWindow *_win;
     QUIContentView *_contentView;
 };
 
-struct window *window_new()
+QuWindow *window_new()
 {
     NSRect rect;
     NSWindowStyleMask style;
-    struct window *win = malloc(sizeof(struct window));
+    QuWindow *win = malloc(sizeof(QuWindow));
 
     rect = NSMakeRect(320, 350, 480, 320);
     style = NSWindowStyleMaskTitled;
@@ -37,17 +37,17 @@ struct window *window_new()
     return win;
 }
 
-void window_show(struct window *win)
+void window_show(QuWindow *win)
 {
     [win->_win makeKeyAndOrderFront:nil];
     [win->_win makeMainWindow];
 }
 
-void window_close(struct window *win)
+void window_close(QuWindow *win)
 {
 }
 
-void window_draw_func(struct window *win,
+void window_draw_func(QuWindow *win,
     void (*df)(QuContext *, struct QuRect))
 {
     [win->_contentView setDrawFunction:df];
