@@ -1,16 +1,16 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-struct QuRGBA {
+typedef struct QuRGBA {
     float red;
     float green;
     float blue;
     float alpha;
-};
+} QuRGBA;
 
-inline struct QuRGBA rgba(float r, float g, float b, float a)
+inline QuRGBA rgba(float r, float g, float b, float a)
 {
-    struct QuRGBA c;
+    QuRGBA c;
     c.red = r;
     c.green = g;
     c.blue = b;

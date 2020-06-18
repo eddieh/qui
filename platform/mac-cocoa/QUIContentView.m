@@ -2,7 +2,7 @@
 
 @interface QUIContentView () {
     QuContext *_context;
-    void (*_drawf)(QuContext *, struct QuRect);
+    void (*_drawf)(QuContext *, QuRect);
 }
 @end
 
@@ -11,7 +11,7 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     CGContextRef cgctx;
-    struct QuRect dirty;
+    QuRect dirty;
 
     if (!_context) {
         cgctx = [[NSGraphicsContext currentContext] CGContext];
@@ -31,7 +31,7 @@
 
 }
 
-- (void)setDrawFunction:(void (*)(QuContext *, struct QuRect))df
+- (void)setDrawFunction:(void (*)(QuContext *, QuRect))df
 {
     _drawf = df;
 }

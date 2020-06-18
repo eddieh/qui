@@ -20,7 +20,7 @@ QuContext *context_new(CGContextRef cg, NSWindow *win, NSView *view)
     return ctx;
 }
 
-void fill_color(QuContext *ctx, struct QuRGBA c)
+void fill_color(QuContext *ctx, QuRGBA c)
 {
     CGContextRef cgctx;
     CGColorRef cgc;
@@ -28,9 +28,10 @@ void fill_color(QuContext *ctx, struct QuRGBA c)
     cgctx = ctx->_context;
     cgc = CGColorCreateGenericRGB(c.red, c.green, c.blue, c.alpha);
     CGContextSetFillColorWithColor(cgctx, cgc);
+    CGColorRelease(cgc);
 }
 
-void fill(QuContext *ctx, struct QuRect r)
+void fill_rect(QuContext *ctx, QuRect r)
 {
     CGContextRef cgctx;
     CGRect cgr;
@@ -40,10 +41,23 @@ void fill(QuContext *ctx, struct QuRect r)
     CGContextFillRect(cgctx, cgr);
 }
 
-void stroke_color(QuContext *ctx, struct QuRGBA c)
+void stroke_color(QuContext *ctx, QuRGBA c)
 {
+    CGContextRef cgctx;
+    CGColorRef cgc;
+
+    cgctx = ctx->_context;
+    cgc = CGColorCreateGenericRGB(c.red, c.green, c.blue, c.alpha);
+    CGContextSetStrokeColorWithColor(cgctx, cgc);
+    CGColorRelease(cgc);
 }
 
-void stroke(QuContext *ctx, struct QuRect r)
+void stroke_rect(QuContext *ctx, QuRect r)
 {
+    CGContextRef cgctx;
+    CGRect cgr;
+
+    cgctx = ctx->_context;
+    cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    CGContextStrokeRect(cgctx, cgr);
 }

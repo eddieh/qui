@@ -6,10 +6,10 @@
 
 typedef struct QuContext QuContext;
 
-void fill_color(QuContext *ctx, struct QuRGBA c);
-void fill(QuContext *ctx, struct QuRect r);
+void fill_color(QuContext *ctx, QuRGBA c);
+void fill_rect(QuContext *ctx, QuRect r);
 
-void stroke_color(QuContext *ctx, struct QuRGBA c);
-void stroke(QuContext *ctx, struct QuRect r);
+void stroke_color(QuContext *ctx, QuRGBA c);
+void stroke_rect(QuContext *ctx, QuRect r);
 
 #endif /* CONTEXT_H */

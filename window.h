@@ -12,6 +12,6 @@ void window_show(QuWindow *win);
 void window_close(QuWindow *win);
 
 void window_draw_func(QuWindow *win,
-    void (*df)(QuContext *ctx, struct QuRect));
+    void (*df)(QuContext *ctx, QuRect));
 
 #endif /* WINDOW_H */

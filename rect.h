@@ -1,53 +1,53 @@
 #ifndef RECT_H
 #define RECT_H
 
-struct QuPoint {
+typedef struct QuPoint {
     float x;
     float y;
-};
+} QuPoint;
 
-struct QuVector {
+typedef struct QuVector {
     float dx;
     float dy;
-};
+} QuVector;
 
-struct QuSize {
+typedef struct QuSize {
     float width;
     float height;
-};
+} QuSize;
 
-struct QuRect {
-    struct QuPoint origin;
-    struct QuSize size;
-};
+typedef struct QuRect {
+    QuPoint origin;
+    QuSize size;
+} QuRect;
 
-inline struct QuPoint point(float x, float y)
+inline QuPoint point(float x, float y)
 {
-    struct QuPoint p;
+    QuPoint p;
     p.x = x;
     p.y = y;
     return p;
 }
 
-inline struct QuVector vector(float dx, float dy)
+inline QuVector vector(float dx, float dy)
 {
-    struct QuVector v;
+    QuVector v;
     v.dx = dx;
     v.dy = dy;
     return v;
 }
 
-inline struct QuSize size(float w, float h)
+inline QuSize size(float w, float h)
 {
-    struct QuSize s;
+    QuSize s;
     s.width = w;
     s.height = h;
     return s;
 }
 
-inline struct QuRect rect(float x, float y, float w, float h)
+inline QuRect rect(float x, float y, float w, float h)
 {
-    struct QuRect r;
+    QuRect r;
     r.origin.x = x;
     r.origin.y = y;
     r.size.width = w;

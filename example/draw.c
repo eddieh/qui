@@ -1,9 +1,13 @@
 #include "qui.h"
 
-void draw(QuContext *ctx, struct QuRect dirty)
+void draw(QuContext *ctx, QuRect dirty)
 {
+    QuRect box = rect(42, 42, 200, 100);
+
     fill_color(ctx, rgba(1, 0, 0, 1));
-    fill(ctx, rect(0, 0, 200, 100));
+    fill_rect(ctx, box);
+    stroke_color(ctx, rgba(0, 0, 0, 1));
+    stroke_rect(ctx, box);
 }
 
 int app_init_cb(QuApp *app)
