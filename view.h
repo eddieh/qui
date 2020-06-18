@@ -4,7 +4,7 @@
 #include "list.h"
 
 struct view {
-    struct list *children;
+    QuList *children;
 };
 
 #endif /* VIEW_H */

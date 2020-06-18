@@ -4,9 +4,9 @@
 
 int main(int argc, char **argv)
 {
-    struct list *lst = list_new(1);
+    QuList *lst = list_new(1);
     list_push(lst, NULL);
     list_push(lst, NULL);
-    printf("lst->count = %zu\n", lst->count);
+    printf("lst->count = %zu\n", list_count(lst));
     return 0;
 }

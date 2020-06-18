@@ -6,7 +6,7 @@
 #import "QUIContentView.h"
 
 struct QuWindow {
-    struct list *children;
+    QuList *children;
     NSWindow *_win;
     QUIContentView *_contentView;
 };

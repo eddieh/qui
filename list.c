@@ -3,16 +3,22 @@
 #include "list.h"
 #include "util.h"
 
-struct list *list_new(size_t size)
+struct QuList {
+    size_t count;
+    size_t size;
+    void **objects;
+};
+
+QuList *list_new(size_t size)
 {
-    struct list *lst = malloc(sizeof(struct list));
+    QuList *lst = malloc(sizeof(QuList));
     lst->count = 0;
     lst->size = size ? size * 2 : 4;
     lst->objects = calloc(lst->size, sizeof(void *));
     return lst;
 }
 
-void list_insert(struct list *lst, void *obj, size_t idx)
+void list_insert(QuList *lst, void *obj, size_t idx)
 {
     if (idx > lst->count)
         qui_die("index %d beyond count %d of list %p", idx, lst->count, lst);
@@ -30,7 +36,7 @@ void list_insert(struct list *lst, void *obj, size_t idx)
     lst->objects[idx] = obj;
 }
 
-void *list_remove(struct list *lst, size_t idx)
+void *list_remove(QuList *lst, size_t idx)
 {
     void *obj;
 
@@ -50,17 +56,17 @@ void *list_remove(struct list *lst, size_t idx)
     return obj;
 }
 
-void list_push(struct list *lst, void *obj)
+void list_push(QuList *lst, void *obj)
 {
     list_insert(lst, obj, lst->count);
 }
 
-void *list_pop(struct list *lst)
+void *list_pop(QuList *lst)
 {
     return list_remove(lst, lst->count - 1);
 }
 
-void *list_first(struct list *lst)
+void *list_first(QuList *lst)
 {
     if (lst->count)
         qui_die("list %p is empty", lst);
@@ -68,7 +74,7 @@ void *list_first(struct list *lst)
     return lst->objects[0];
 }
 
-void *list_last(struct list *lst)
+void *list_last(QuList *lst)
 {
     if (lst->count)
         qui_die("list %p is empty", lst);
@@ -76,10 +82,15 @@ void *list_last(struct list *lst)
     return lst->objects[lst->count - 1];
 }
 
-void *list_at(struct list *lst, size_t idx)
+void *list_at(QuList *lst, size_t idx)
 {
     if (idx >= lst->count)
         qui_die("index %d beyond count %d of list %p", idx, lst->count, lst);
 
     return lst->objects[idx];
+}
+
+size_t list_count(QuList *lst)
+{
+    return lst->count;
 }
