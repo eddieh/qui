@@ -12,4 +12,6 @@ void fill_rect(QuContext *ctx, QuRect r);
 void stroke_color(QuContext *ctx, QuRGBA c);
 void stroke_rect(QuContext *ctx, QuRect r);
 
+void draw_text(QuContext *ctx, const char *text, QuPoint pos);
+
 #endif /* CONTEXT_H */

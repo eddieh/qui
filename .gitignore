@@ -20,6 +20,7 @@ test/list
 example/basic
 example/window
 example/draw
+example/text
 
 platform/mac-cocoa/simple
 

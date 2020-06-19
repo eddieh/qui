@@ -61,3 +61,56 @@ void stroke_rect(QuContext *ctx, QuRect r)
     cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
     CGContextStrokeRect(cgctx, cgr);
 }
+
+void draw_text(QuContext *ctx, const char *text, QuPoint pos)
+{
+    CGContextRef cgctx;
+    CFStringRef str;
+    CFStringRef keys[1];
+    CFTypeRef values[1];
+    CFDictionaryRef attrs;
+    CFAttributedStringRef styled;
+    CTFontRef font;
+    CTLineRef line;
+
+    cgctx = ctx->_context;
+
+    font = CTFontCreateUIFontForLanguage(
+        kCTFontUIFontPushButton,
+        0,
+        NULL
+    );
+
+    keys[0] = kCTFontAttributeName;
+    values[0] = font;
+
+    attrs = CFDictionaryCreate(
+        kCFAllocatorDefault,
+        (const void**)keys,
+        (const void**)values,
+        sizeof(keys) / sizeof(keys[0]),
+        &kCFTypeDictionaryKeyCallBacks,
+        &kCFTypeDictionaryValueCallBacks
+    );
+
+    str = CFStringCreateWithCString(
+        kCFAllocatorDefault,
+        text,
+        kCFStringEncodingUTF8
+    );
+    styled = CFAttributedStringCreate(
+        kCFAllocatorDefault,
+        str,
+        attrs
+    );
+    line = CTLineCreateWithAttributedString(styled);
+
+    CGContextSetTextPosition(cgctx, pos.x, pos.y);
+    CTLineDraw(line, cgctx);
+
+    CFRelease(line);
+    CFRelease(styled);
+    CFRelease(str);
+    CFRelease(attrs);
+    CFRelease(font);
+}

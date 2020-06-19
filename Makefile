@@ -29,6 +29,7 @@ EXAMPLES :=
 EXAMPLES += example/basic
 EXAMPLES += example/window
 EXAMPLES += example/draw
+EXAMPLES += example/text
 
 PROGRAMS :=
 PROGRAMS += $(TESTS) $(EXAMPLES)
