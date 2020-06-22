@@ -21,6 +21,7 @@ example/basic
 example/window
 example/draw
 example/text
+example/button
 
 platform/mac-cocoa/simple
 

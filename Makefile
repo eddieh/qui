@@ -30,6 +30,7 @@ EXAMPLES += example/basic
 EXAMPLES += example/window
 EXAMPLES += example/draw
 EXAMPLES += example/text
+EXAMPLES += example/button
 
 PROGRAMS :=
 PROGRAMS += $(TESTS) $(EXAMPLES)

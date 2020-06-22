@@ -8,6 +8,31 @@ typedef struct QuRGBA {
     float alpha;
 } QuRGBA;
 
+QuRGBA QuRGBA_WindowBackground;
+QuRGBA QuRGBA_ControlBackground;
+QuRGBA QuRGBA_Control;
+QuRGBA QuRGBA_ControlShadow;
+QuRGBA QuRGBA_ControlDarkShadow;
+QuRGBA QuRGBA_ControlHighlight;
+QuRGBA QuRGBA_ControlLightHighlight;
+QuRGBA QuRGBA_ControlText;
+
+/* + controlBackgroundColor */
+/* + controlColor */
+/* + controlDarkShadowColor */
+/* + controlHighlightColor */
+/* + controlLightHighlightColor */
+/* + controlShadowColor */
+/* + controlTextColor */
+/* + gridColor */
+/* + scrollBarColor */
+/* + selectedControlColor */
+/* + selectedControlTextColor */
+/* + selectedTextBackgroundColor */
+/* + selectedTextColor */
+/* + textBackgroundColor */
+/* + textColor */
+
 inline QuRGBA rgba(float r, float g, float b, float a)
 {
     QuRGBA c;

@@ -14,4 +14,6 @@ void stroke_rect(QuContext *ctx, QuRect r);
 
 void draw_text(QuContext *ctx, const char *text, QuPoint pos);
 
+void draw_button(QuContext *ctx, QuRect r);
+
 #endif /* CONTEXT_H */

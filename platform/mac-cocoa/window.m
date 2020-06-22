@@ -28,6 +28,8 @@ QuWindow *window_new()
         defer:NO
     ] autorelease];
 
+    [win->_win setBackgroundColor:[NSColor lightGrayColor]];
+
     win->_contentView = [[[QUIContentView alloc]
         initWithFrame:rect
     ] autorelease];

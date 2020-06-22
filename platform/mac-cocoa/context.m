@@ -114,3 +114,10 @@ void draw_text(QuContext *ctx, const char *text, QuPoint pos)
     CFRelease(attrs);
     CFRelease(font);
 }
+
+void draw_button(QuContext *ctx, QuRect r)
+{
+    CGRect cgr;
+    cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    NSDrawButton(cgr, cgr);
+}
