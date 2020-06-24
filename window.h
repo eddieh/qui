@@ -27,7 +27,7 @@ QuRect window_frame(QuWindow *win);
 void window_set_frame(QuWindow *win, QuRect frame);
 
 int window_resizable(QuWindow *win);
-void window_set_resizable(int resizable);
+void window_set_resizable(QuWindow *win, int resizable);
 
 void window_center(QuWindow *win);
 

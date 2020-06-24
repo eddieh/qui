@@ -15,6 +15,7 @@ DFRAME_LOCAL_CONFIG ?= local.mk
 -include ${DFRAME_LOCAL_CONFIG}
 
 LIB_OBJS :=
+LIB_OBJS := private.o
 LIB_OBJS += main.o
 LIB_OBJS += QUIApplication.o
 LIB_OBJS += QUIContentView.o

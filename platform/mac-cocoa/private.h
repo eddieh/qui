@@ -20,9 +20,6 @@ QuSize NSSize_toQuSize(NSSize s);
 CGSize QuSize_toCGSize(QuSize s);
 QuSize CGSize_toQuSize(CGSize s);
 
-NSVector QuVector_toNSVector(QuVector v);
-QuVector NSVector_toQuVector(NSVector v);
-
 CGVector QuVector_toCGVector(QuVector v);
 QuVector CGVector_toQuVector(CGVector v);
 

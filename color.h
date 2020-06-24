@@ -33,6 +33,8 @@ QuRGBA QuRGBA_ControlText;
 /* + textBackgroundColor */
 /* + textColor */
 
+QuRGBA QuRGBA_White;
+
 inline QuRGBA rgba(float r, float g, float b, float a)
 {
     QuRGBA c;
