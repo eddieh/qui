@@ -17,6 +17,7 @@ DFRAME_LOCAL_CONFIG ?= local.mk
 LIB_OBJS :=
 LIB_OBJS += util.o
 LIB_OBJS += list.o
+LIB_OBJS += rect.o
 LIB_OBJS += color.o
 LIB_OBJS += qui.o
 LIB_OBJS += app.o

@@ -55,4 +55,6 @@ inline QuRect rect(float x, float y, float w, float h)
     return r;
 }
 
+char *rect_str(QuRect r);
+
 #endif /* RECT_H */
