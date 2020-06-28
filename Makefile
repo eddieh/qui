@@ -32,6 +32,7 @@ EXAMPLES += example/basic
 EXAMPLES += example/window
 EXAMPLES += example/window-color
 EXAMPLES += example/window-frame
+EXAMPLES += example/window-resizable
 EXAMPLES += example/draw
 EXAMPLES += example/text
 EXAMPLES += example/button

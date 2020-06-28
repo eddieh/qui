@@ -57,7 +57,6 @@ void window_draw_func(QuWindow *win,
     [win->_contentView setDrawFunction:df];
 }
 
-
 QuRGBA window_background_color(QuWindow *win)
 {
     NSColor *bg = [win->_win backgroundColor];
@@ -82,15 +81,22 @@ void window_set_frame(QuWindow *win, QuRect frame)
     [win->_win setFrame:rect display:YES];
 }
 
-/*
+
 int window_resizable(QuWindow *win)
 {
+    return [win->_win isResizable];
 }
 
 void window_set_resizable(QuWindow *win, int resizable)
 {
+    NSWindowStyleMask mask;
+    mask = [win->_win styleMask];
+    if (resizable)
+        mask |= NSWindowStyleMaskResizable;
+    else
+        mask &= ~(1 << NSWindowStyleMaskResizable);
+    [win->_win setStyleMask:mask];
 }
-*/
 
 void window_center(QuWindow *win)
 {

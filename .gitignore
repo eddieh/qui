@@ -21,6 +21,7 @@ example/basic
 example/window
 example/window-color
 example/window-frame
+example/window-resizable
 example/draw
 example/text
 example/button
