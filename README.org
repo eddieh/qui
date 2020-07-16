@@ -1,0 +1,33 @@
+#+TITLE: QUI - Quick UI
+#+DATE: 2020-07-16
+#+STARTUP: showall
+
+QUI is a quick and simple user interface library for C.
+
+The library is meant to be extremely simple to drop into a project and
+get a quick UI up and running for prototyping, visualizing, and/or
+debugging. It isn't a desktop environment or a full featured widget
+library. Use it when you need basic windows, drawing primitives, and
+maybe a button or two.
+
+The only documentation is the README. The README contains everything
+you'll ever need when using QUI: how to use it, how to build it, how
+to hack it, a tutorial, and a complete reference.
+
+** Library conventions
+
+Types are prefixed with =Qu=. There are opaque object references
+(QuApp, QuWindow, QuButton, etc.) and small structs (QuRect, QuPoint,
+QuRGBA, etc.).
+
+Opaque references are malloc'd with a constructor function that ends
+with =_new= and you're responsible for freeing the returned reference.
+Small structs are created on the stack and no manual memory management
+is needed.
+
+- new
+- create
+- build
+- make
+- construct
+- alloc
