@@ -21,13 +21,17 @@ Types are prefixed with =Qu=. There are opaque object references
 QuRGBA, etc.).
 
 Opaque references are malloc'd with a constructor function that ends
-with =_new= and you're responsible for freeing the returned reference.
+with =A= and you're responsible for freeing the returned reference.
 Small structs are created on the stack and no manual memory management
-is needed.
+is needed, they end with a =S=.
 
-- new
-- create
-- build
-- make
-- construct
-- alloc
+#+begin_src C
+QuApp app = QuAppA(); // A = allocate on the heap
+QuRect rect = QuRectS(); // S = staticly allocate or allocate on the stack
+#+end_src
+
+Types are names such that they follow the form PrefixType where Qu is
+the prefix and type is App, Window, View, etc.
+
+Functions begin with the lowercase type name without the prefix and
+/always/ take an object of the named type as the first argument.
