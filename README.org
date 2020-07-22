@@ -25,9 +25,9 @@ with =A= and you're responsible for freeing the returned reference.
 Small structs are created on the stack and no manual memory management
 is needed, they end with a =S=.
 
-#+begin_src C
-QuApp app = QuAppA(); // A = allocate on the heap
-QuRect rect = QuRectS(); // S = staticly allocate or allocate on the stack
+#+begin_src c
+  QuApp *app = QuAppA(); // A = allocate on the heap
+  QuRect rect = QuRectS(); // S = staticly allocate or allocate on the stack
 #+end_src
 
 Types are names such that they follow the form PrefixType where Qu is
