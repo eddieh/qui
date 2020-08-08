@@ -16,4 +16,6 @@ void draw_text(QuContext *ctx, const char *text, QuPoint pos);
 
 void draw_button(QuContext *ctx, QuRect r);
 
+void line_width(QuContext *ctx, float w);
+
 #endif /* CONTEXT_H */

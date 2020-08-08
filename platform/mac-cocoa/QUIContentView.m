@@ -15,13 +15,13 @@
 
     if (!_context) {
         cgctx = [[NSGraphicsContext currentContext] CGContext];
-        _context = context_new(
+        _context = _QuContextA(
             cgctx,
             [self window],
             self);
     }
 
-    dirty = rect(dirtyRect.origin.x,
+    dirty = QuRectS(dirtyRect.origin.x,
                  dirtyRect.origin.y,
                  dirtyRect.size.width,
                  dirtyRect.size.height);

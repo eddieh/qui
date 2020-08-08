@@ -5,7 +5,7 @@
 
 typedef struct QuList QuList;
 
-QuList *list_new(size_t count);
+QuList *QuListA(size_t count);
 
 void list_insert(QuList *lst, void *obj, size_t idx);
 void *list_remove(QuList *lst, size_t idx);

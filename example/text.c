@@ -2,12 +2,12 @@
 
 void draw(QuContext *ctx, QuRect dirty)
 {
-    draw_text(ctx, "Quick and easy.", point(42, 42));
+    draw_text(ctx, "Quick and easy.", QuPointS(42, 42));
 }
 
 int app_init_cb(QuApp *app)
 {
-    QuWindow *win = window_new();
+    QuWindow *win = QuWindowA();
     window_draw_func(win, draw);
     window_show(win);
     return 1;

@@ -2,7 +2,7 @@
 
 int init(QuApp *app)
 {
-    QuWindow *win = window_new();
+    QuWindow *win = QuWindowA();
     window_set_background_color(win, QuRGBA_White);
     window_show(win);
     return 1;

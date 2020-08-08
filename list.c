@@ -9,7 +9,7 @@ struct QuList {
     void **objects;
 };
 
-QuList *list_new(size_t size)
+QuList *QuListA(size_t size)
 {
     QuList *lst = malloc(sizeof(QuList));
     lst->count = 0;

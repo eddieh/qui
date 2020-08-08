@@ -2,7 +2,7 @@
 
 void draw(QuContext *ctx, QuRect dirty)
 {
-    QuRect box = rect(42, 42, 200, 100);
+    QuRect box = QuRectS(42, 42, 200, 100);
 
     fill_color(ctx, rgba(1, 0, 0, 1));
     fill_rect(ctx, box);
@@ -12,7 +12,7 @@ void draw(QuContext *ctx, QuRect dirty)
 
 int app_init_cb(QuApp *app)
 {
-    QuWindow *win = window_new();
+    QuWindow *win = QuWindowA();
     window_draw_func(win, draw);
     window_show(win);
     return 1;

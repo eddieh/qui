@@ -14,7 +14,7 @@ NSRect QuRect_toNSRect(QuRect r)
 
 QuRect NSRect_toQuRect(NSRect r)
 {
-    return rect(
+    return QuRectS(
         r.origin.x,
         r.origin.y,
         r.size.width,

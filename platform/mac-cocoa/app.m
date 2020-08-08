@@ -10,7 +10,7 @@ struct QuApp {
     QUIApplicationDelegate *_delegate;
 };
 
-QuApp *app_new()
+QuApp *QuAppA()
 {
     appref = malloc(sizeof(QuApp));
     if (!appref)

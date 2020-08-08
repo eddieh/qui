@@ -11,7 +11,7 @@ struct QuContext {
     NSView *_view;
 };
 
-QuContext *context_new(CGContextRef cg, NSWindow *win, NSView *view)
+QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view)
 {
     QuContext *ctx = malloc(sizeof(QuContext));
     ctx->_context = cg;

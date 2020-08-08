@@ -5,7 +5,7 @@
 QuPoint window_position(QuWindow *win)
 {
     QuRect frame = window_frame(win);
-    return point(frame.origin.x, frame.origin.y);
+    return QuPointS(frame.origin.x, frame.origin.y);
 }
 
 void window_set_position(QuWindow *win, QuPoint pos)
@@ -19,7 +19,7 @@ void window_set_position(QuWindow *win, QuPoint pos)
 QuSize window_size(QuWindow *win)
 {
     QuRect frame = window_frame(win);
-    return size(frame.size.width, frame.size.height);
+    return QuSizeS(frame.size.width, frame.size.height);
 }
 
 void window_set_size(QuWindow *win, QuSize s)

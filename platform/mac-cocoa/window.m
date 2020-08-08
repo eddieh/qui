@@ -11,7 +11,7 @@ struct QuWindow {
     QUIContentView *_contentView;
 };
 
-QuWindow *window_new()
+QuWindow *QuWindowA()
 {
     NSRect rect;
     NSWindowStyleMask style;

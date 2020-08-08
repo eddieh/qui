@@ -2,7 +2,7 @@
 
 int app_init_cb(QuApp *app)
 {
-    QuWindow *win = window_new();
+    QuWindow *win = QuWindowA();
     window_show(win);
     return 1;
 }

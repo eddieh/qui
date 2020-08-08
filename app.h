@@ -7,7 +7,7 @@ typedef struct QuApp QuApp;
 
 QuApp *appref;
 
-QuApp *app_new();
+QuApp *QuAppA();
 void app_run(QuApp *app);
 void app_cleanup(QuApp *app);
 

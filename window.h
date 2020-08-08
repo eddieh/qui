@@ -6,7 +6,7 @@
 
 typedef struct QuWindow QuWindow;
 
-QuWindow *window_new();
+QuWindow *QuWindowA();
 
 void window_show(QuWindow *win);
 void window_close(QuWindow *win);

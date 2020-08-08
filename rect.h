@@ -21,7 +21,7 @@ typedef struct QuRect {
     QuSize size;
 } QuRect;
 
-inline QuPoint point(float x, float y)
+inline QuPoint QuPointS(float x, float y)
 {
     QuPoint p;
     p.x = x;
@@ -29,7 +29,7 @@ inline QuPoint point(float x, float y)
     return p;
 }
 
-inline QuVector vector(float dx, float dy)
+inline QuVector QuVectorS(float dx, float dy)
 {
     QuVector v;
     v.dx = dx;
@@ -37,7 +37,7 @@ inline QuVector vector(float dx, float dy)
     return v;
 }
 
-inline QuSize size(float w, float h)
+inline QuSize QuSizeS(float w, float h)
 {
     QuSize s;
     s.width = w;
@@ -45,7 +45,7 @@ inline QuSize size(float w, float h)
     return s;
 }
 
-inline QuRect rect(float x, float y, float w, float h)
+inline QuRect QuRectS(float x, float y, float w, float h)
 {
     QuRect r;
     r.origin.x = x;

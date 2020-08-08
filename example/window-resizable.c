@@ -2,8 +2,8 @@
 
 int init(QuApp *app)
 {
-    QuWindow *win = window_new();
-    window_set_frame(win, rect(0, 0, 220, 220));
+    QuWindow *win = QuWindowA();
+    window_set_frame(win, QuRectS(0, 0, 220, 220));
     window_set_resizable(win, 1);
     window_center(win);
     window_show(win);

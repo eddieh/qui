@@ -6,7 +6,7 @@ int __app_default_init(QuApp *app);
 int __app_default_menu(QuApp *app);
 int __app_default_window(QuApp *app);
 
-QuContext *context_new(CGContextRef cg, NSWindow *win, NSView *view);
+QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view);
 
 NSPoint QuPoint_toNSPoint(QuPoint p);
 QuPoint NSPoint_toQuPoint(NSPoint p);
