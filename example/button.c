@@ -2,7 +2,8 @@
 
 void draw(QuContext *ctx, QuRect dirty)
 {
-    draw_button(ctx, QuRectS(42, 42, 100, 24));
+    draw_button(ctx, QuRectS(42, 78, 100, 24));
+    draw_button_pushed(ctx, QuRectS(42, 42, 100, 24));
 }
 
 int app_init_cb(QuApp *app)

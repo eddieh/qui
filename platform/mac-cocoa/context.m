@@ -121,3 +121,10 @@ void draw_button(QuContext *ctx, QuRect r)
     cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
     NSDrawButton(cgr, cgr);
 }
+
+void draw_button_pushed(QuContext *ctx, QuRect r)
+{
+    CGRect cgr;
+    cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    NSDrawGrayBezel(cgr, cgr);
+}

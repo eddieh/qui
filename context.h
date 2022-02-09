@@ -15,6 +15,7 @@ void stroke_rect(QuContext *ctx, QuRect r);
 void draw_text(QuContext *ctx, const char *text, QuPoint pos);
 
 void draw_button(QuContext *ctx, QuRect r);
+void draw_button_pushed(QuContext *ctx, QuRect r);
 
 void line_width(QuContext *ctx, float w);
 
