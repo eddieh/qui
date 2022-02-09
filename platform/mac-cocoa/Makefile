@@ -1,6 +1,6 @@
-CC = cc
-LD = $(CC)
-AR = ar
+#CC = cc
+#LD = $(CC)
+#AR = ar
 
 CFLAGS ?= -O2 -g
 

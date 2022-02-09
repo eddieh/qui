@@ -1,6 +1,6 @@
-CC = gcc
-LD = $(CC)
-AR = ar
+#CC = cc
+#LD = $(CC)
+#AR = ar
 
 CFLAGS ?= -O2 -g
 
@@ -54,6 +54,7 @@ OSNAME := $(shell uname)
 ifeq ($(OSNAME),Darwin)
 PLATFORM_PATH = platform/mac-cocoa
 ldflags += -framework Cocoa
+ldflags += -lSystem
 ldflags += -L$(PLATFORM_PATH)
 LIBS += $(PLATFORM_PATH)/libqui-mac-cocoa.a
 MODULES += $(PLATFORM_PATH)
