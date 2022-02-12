@@ -28,7 +28,6 @@ TESTS :=
 TESTS += test/list
 
 EXAMPLES :=
-EXAMPLES += example/basic
 EXAMPLES += example/window
 EXAMPLES += example/window-color
 EXAMPLES += example/window-frame

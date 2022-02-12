@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "qui.h"
-#import "private.h"
+#import "context-private.h"
 #import "QUIApplication.h"
 
 struct QuApp {
@@ -9,6 +9,10 @@ struct QuApp {
     NSApplication *_app;
     QUIApplicationDelegate *_delegate;
 };
+
+int __app_default_init(QuApp *app);
+int __app_default_menu(QuApp *app);
+int __app_default_window(QuApp *app);
 
 QuApp *QuAppA()
 {

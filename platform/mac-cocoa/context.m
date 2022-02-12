@@ -3,7 +3,8 @@
 #import <CoreGraphics/CGColor.h>
 
 #import "qui.h"
-#import "private.h"
+#import "platform.h"
+#import "context-private.h"
 
 struct QuContext {
     CGContextRef _context;

@@ -1,16 +1,10 @@
 #include "view.h"
 #include "window.h"
+#include "private.h"
 
 #include <string.h>
 
-struct QuView {
-    QuWindow *window;
-    QuView *parent;
-    QuList *children;
-    void (*drawf)(QuContext *, QuRect);
-    QuRect frame;
-    QuRect bounds;
-};
+typedef struct QuViewPrivate QuView;
 
 QuView *QuViewA()
 {

@@ -17,7 +17,6 @@ version.h
 test/list
 
 # examples
-example/basic
 example/window
 example/window-color
 example/window-frame

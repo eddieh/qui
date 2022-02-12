@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "qui.h"
-#import "private.h"
+#import "platform.h"
 
 NSRect QuRect_toNSRect(QuRect r)
 {

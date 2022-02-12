@@ -1,5 +1,5 @@
 #import "QUIContentView.h"
-#import "private.h"
+#import "context-private.h"
 
 @interface QUIContentView () {
     QuWindow *_window;

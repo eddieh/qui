@@ -5,7 +5,7 @@
 #include "context.h"
 #include "rect.h"
 
-typedef struct QuView QuView;
+typedef struct QuViewPrivate QuView;
 
 QuView *QuViewA();
 

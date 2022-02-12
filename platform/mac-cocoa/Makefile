@@ -15,7 +15,7 @@ DFRAME_LOCAL_CONFIG ?= local.mk
 -include ${DFRAME_LOCAL_CONFIG}
 
 LIB_OBJS :=
-LIB_OBJS := private.o
+LIB_OBJS := platform.o
 LIB_OBJS += main.o
 LIB_OBJS += QUIApplication.o
 LIB_OBJS += QUIContentView.o
@@ -29,7 +29,7 @@ all:
 
 cflags = -fno-strict-aliasing
 cflags += -Wall -Wwrite-strings
-cflags += -I. -I../../include
+cflags += -I. -I../../include -I../../src
 
 LIBS := libqui-mac-cocoa.a
 OBJS := $(LIB_OBJS) $(EXTRA_OBJS) $(TESTS:%=%.o)
@@ -57,5 +57,5 @@ cflags += $($(*)-cflags) $(CPPFLAGS) $(CFLAGS)
 	$(Q)$(CC) $(cflags) -c -o $@ $<
 
 clean:
-	@echo "  CLEAN"
+	@echo "  CLEAN platform/mac-cocoa"
 	@rm -f *.[oa] .*.d test/*.o $(TESTS)

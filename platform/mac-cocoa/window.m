@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "qui.h"
+#import "platform.h"
 #import "private.h"
 
 #import "QUIContentView.h"
@@ -108,6 +109,13 @@ void window_center(QuWindow *win)
 
 void window_add_subview(QuWindow *win, QuView *view)
 {
+    QuViewPrivate *pv = private_view(view);
+    assert(pv->window == NULL);
+    assert(pv->parent == NULL);
+
+    pv->window = win;
+    pv->parent = NULL;
+
     list_push(win->children, view);
 }
 
