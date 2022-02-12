@@ -25,6 +25,7 @@ example/window-resizable
 example/draw
 example/text
 example/button
+example/subview
 
 platform/mac-cocoa/simple
 

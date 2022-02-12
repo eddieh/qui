@@ -55,6 +55,11 @@ inline QuRect QuRectS(float x, float y, float w, float h)
     return r;
 }
 
+QuPoint QuPointZero;
+QuVector QuVectorZero;
+QuSize QuSizeZero;
+QuRect QuRectZero;
+
 char *rect_str(QuRect r);
 
 #endif /* RECT_H */

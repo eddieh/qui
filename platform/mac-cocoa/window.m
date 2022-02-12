@@ -34,9 +34,12 @@ QuWindow *QuWindowA()
 
     win->_contentView = [[[QUIContentView alloc]
         initWithFrame:rect
+        window:win
     ] autorelease];
 
     [win->_win setContentView:win->_contentView];
+
+    win->children = QuListA(1);
 
     return win;
 }
@@ -101,4 +104,19 @@ void window_set_resizable(QuWindow *win, int resizable)
 void window_center(QuWindow *win)
 {
     [win->_win center];
+}
+
+void window_add_subview(QuWindow *win, QuView *view)
+{
+    list_push(win->children, view);
+}
+
+size_t window_subview_count(QuWindow *win)
+{
+    return list_count(win->children);
+}
+
+QuView *window_subview_at(QuWindow *win, size_t idx)
+{
+    return list_at(win->children, idx);
 }

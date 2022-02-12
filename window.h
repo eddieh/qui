@@ -3,6 +3,7 @@
 
 #include "context.h"
 #include "rect.h"
+#include "view.h"
 
 typedef struct QuWindow QuWindow;
 
@@ -30,5 +31,9 @@ int window_resizable(QuWindow *win);
 void window_set_resizable(QuWindow *win, int resizable);
 
 void window_center(QuWindow *win);
+
+void window_add_subview(QuWindow *win, QuView *view);
+size_t window_subview_count(QuWindow *win);
+QuView *window_subview_at(QuWindow *win, size_t idx);
 
 #endif /* WINDOW_H */

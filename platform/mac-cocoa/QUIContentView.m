@@ -1,6 +1,8 @@
 #import "QUIContentView.h"
+#import "private.h"
 
 @interface QUIContentView () {
+    QuWindow *_window;
     QuContext *_context;
     void (*_drawf)(QuContext *, QuRect);
 }
@@ -8,10 +10,22 @@
 
 @implementation QUIContentView
 
+- initWithFrame:(NSRect)frame window:(QuWindow *)window
+{
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+
+    _window = window;
+
+    return self;
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     CGContextRef cgctx;
     QuRect dirty;
+    QuView *cv;
+    size_t svcount;
 
     if (!_context) {
         cgctx = [[NSGraphicsContext currentContext] CGContext];
@@ -28,6 +42,17 @@
 
     if (_drawf)
         _drawf(_context, dirty);
+
+    svcount = window_subview_count(_window);
+    for (size_t i = 0; i < svcount; i++) {
+        cv = window_subview_at(_window, i);
+
+        _QuContext_set_current_view(_context, cv);
+
+        view_draw(cv, _context, dirty);
+
+        _QuContext_set_current_view(_context, NULL);
+    }
 
 }
 

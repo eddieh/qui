@@ -9,6 +9,7 @@ struct QuContext {
     CGContextRef _context;
     NSWindow *_window;
     NSView *_view;
+    QuView *current_view;
 };
 
 QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view)
@@ -18,6 +19,11 @@ QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view)
     ctx->_window = win;
     ctx->_view = view;
     return ctx;
+}
+
+void _QuContext_set_current_view(QuContext *ctx, QuView *cv)
+{
+    ctx->current_view = cv;
 }
 
 void fill_color(QuContext *ctx, QuRGBA c)

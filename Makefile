@@ -36,6 +36,7 @@ EXAMPLES += example/window-resizable
 EXAMPLES += example/draw
 EXAMPLES += example/text
 EXAMPLES += example/button
+EXAMPLES += example/subview
 
 PROGRAMS :=
 PROGRAMS += $(TESTS) $(EXAMPLES)
