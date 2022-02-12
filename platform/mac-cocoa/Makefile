@@ -29,7 +29,7 @@ all:
 
 cflags = -fno-strict-aliasing
 cflags += -Wall -Wwrite-strings
-cflags += -I. -I../..
+cflags += -I. -I../../include
 
 LIBS := libqui-mac-cocoa.a
 OBJS := $(LIB_OBJS) $(EXTRA_OBJS) $(TESTS:%=%.o)

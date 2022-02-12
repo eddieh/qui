@@ -15,14 +15,14 @@ DFRAME_LOCAL_CONFIG ?= local.mk
 -include ${DFRAME_LOCAL_CONFIG}
 
 LIB_OBJS :=
-LIB_OBJS += util.o
-LIB_OBJS += list.o
-LIB_OBJS += rect.o
-LIB_OBJS += color.o
-LIB_OBJS += qui.o
-LIB_OBJS += app.o
-LIB_OBJS += window.o
-LIB_OBJS += view.o
+LIB_OBJS += src/util.o
+LIB_OBJS += src/list.o
+LIB_OBJS += src/rect.o
+LIB_OBJS += src/color.o
+LIB_OBJS += src/qui.o
+LIB_OBJS += src/app.o
+LIB_OBJS += src/window.o
+LIB_OBJS += src/view.o
 
 TESTS :=
 TESTS += test/list
@@ -49,7 +49,7 @@ all:
 
 cflags = -fno-strict-aliasing
 cflags += -Wall -Wwrite-strings
-cflags += -I.
+cflags += -Iinclude
 
 OSNAME := $(shell uname)
 ifeq ($(OSNAME),Darwin)
@@ -96,7 +96,7 @@ clean:
 	@for dir in $(MODULES); do ${MAKE} clean -C $$dir; exit_status=$$?; \
 	if [ $$exit_status -ne 0 ]; then exit $$exit_status; fi; done
 	@echo "  CLEAN"
-	@rm -f *.[oa] .*.d $(PROGRAMS)
+	@rm -f src/*.[oa] $(PROGRAMS)
 	@rm -f test/*.[oa] example/*.[oa]
 
 .PHONY: submodules clean
