@@ -82,6 +82,7 @@ QuRect window_frame(QuWindow *win)
 void window_set_frame(QuWindow *win, QuRect frame)
 {
     NSRect rect = QuRect_toNSRect(frame);
+    rect = [win->_win frameRectForContentRect:rect];
     [win->_win setFrame:rect display:YES];
 }
 

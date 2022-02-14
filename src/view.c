@@ -2,7 +2,9 @@
 #include "window.h"
 #include "private.h"
 
+#include <assert.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct QuViewPrivate QuView;
 
@@ -12,6 +14,7 @@ QuView *QuViewA()
     memset(view, 0, sizeof(QuView));
     view->frame = QuRectZero;
     view->bounds = QuRectZero;
+    view->children = QuListA(1);
     return view;
 }
 
@@ -23,8 +26,19 @@ void view_draw_func(QuView *v,
 
 void view_draw(QuView *v, QuContext *c, QuRect dirty)
 {
+    size_t svcount;
+    QuView *cv;
+
     if (v->drawf)
         v->drawf(c, dirty);
+
+    svcount = list_count(v->children);
+    for (size_t i = 0; i < svcount; i++) {
+        cv = list_at(v->children, i);
+        _QuContext_set_current_view(c, cv);
+        view_draw(cv, c, dirty);
+        _QuContext_set_current_view(c, NULL);
+    }
 }
 
 QuPoint view_position(QuView *v)
@@ -69,4 +83,15 @@ void view_set_frame(QuView *v, QuRect frame)
 QuRect view_bounds(QuView *v)
 {
     return v->bounds;
+}
+
+void view_add_subview(QuView *v, QuView *subview)
+{
+    assert(subview->window == NULL);
+    assert(subview->parent == NULL);
+
+    subview->window = v->window;
+    subview->parent = v;
+
+    list_push(v->children, subview);
 }

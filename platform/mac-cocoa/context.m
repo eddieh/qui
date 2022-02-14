@@ -5,6 +5,7 @@
 #import "qui.h"
 #import "platform.h"
 #import "context-private.h"
+#import "private.h"
 
 struct QuContext {
     CGContextRef _context;
@@ -12,6 +13,33 @@ struct QuContext {
     NSView *_view;
     QuView *current_view;
 };
+
+CGRect cg_rect_in_context(QuContext *ctx, QuRect r)
+{
+    QuPoint d;
+    QuViewPrivate *cv;
+
+    if (!ctx->current_view)
+        return CGRectMake(r.origin.x,
+            r.origin.y,
+            r.size.width,
+            r.size.height);
+
+    d = QuPointZero;
+    cv = private_view(ctx->current_view);
+    d.x += cv->frame.origin.x;
+    d.y += cv->frame.origin.y;
+
+    while ((cv = cv->parent)) {
+        d.x += cv->frame.origin.x;
+        d.y += cv->frame.origin.y;
+    }
+
+    return CGRectMake(r.origin.x + d.x,
+        r.origin.y + d.y,
+        r.size.width,
+        r.size.height);
+}
 
 QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view)
 {
@@ -44,7 +72,7 @@ void fill_rect(QuContext *ctx, QuRect r)
     CGRect cgr;
 
     cgctx = ctx->_context;
-    cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    cgr = cg_rect_in_context(ctx, r);
     CGContextFillRect(cgctx, cgr);
 }
 
@@ -65,7 +93,7 @@ void stroke_rect(QuContext *ctx, QuRect r)
     CGRect cgr;
 
     cgctx = ctx->_context;
-    cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    cgr = cg_rect_in_context(ctx, r);
     CGContextStrokeRect(cgctx, cgr);
 }
 

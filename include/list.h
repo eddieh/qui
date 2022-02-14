@@ -20,4 +20,6 @@ void *list_at(QuList *lst, size_t idx);
 
 size_t list_count(QuList *lst);
 
+char *list_str(QuList *lst);
+
 #endif /* LIST_H */

@@ -34,6 +34,10 @@ QuRGBA QuRGBA_ControlText;
 /* + textColor */
 
 QuRGBA QuRGBA_White;
+QuRGBA QuRGBA_Red;
+QuRGBA QuRGBA_Green;
+QuRGBA QuRGBA_Blue;
+QuRGBA QuRGBA_Black;
 
 inline QuRGBA rgba(float r, float g, float b, float a)
 {

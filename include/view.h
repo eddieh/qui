@@ -24,4 +24,6 @@ void view_set_frame(QuView *v, QuRect frame);
 
 QuRect view_bounds(QuView *v);
 
+void view_add_subview(QuView *v, QuView *subview);
+
 #endif /* VIEW_H */

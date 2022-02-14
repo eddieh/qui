@@ -1,5 +1,6 @@
 #import "QUIContentView.h"
 #import "context-private.h"
+#import "private.h"
 
 @interface QUIContentView () {
     QuWindow *_window;
@@ -46,11 +47,8 @@
     svcount = window_subview_count(_window);
     for (size_t i = 0; i < svcount; i++) {
         cv = window_subview_at(_window, i);
-
         _QuContext_set_current_view(_context, cv);
-
         view_draw(cv, _context, dirty);
-
         _QuContext_set_current_view(_context, NULL);
     }
 

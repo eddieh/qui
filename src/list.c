@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "list.h"
 #include "util.h"
@@ -93,4 +94,12 @@ void *list_at(QuList *lst, size_t idx)
 size_t list_count(QuList *lst)
 {
     return lst->count;
+}
+
+char *list_str(QuList *lst)
+{
+    char *ret;
+    asprintf(&ret, "<list:%p count=%zu size=%zu>",
+        lst, lst->count, lst->size);
+    return ret;
 }
