@@ -60,6 +60,7 @@ QuVector QuVectorZero;
 QuSize QuSizeZero;
 QuRect QuRectZero;
 
+/* caller is responsible for freeing */
 char *rect_str(QuRect r);
 
 #endif /* RECT_H */

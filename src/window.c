@@ -1,6 +1,9 @@
 #include "list.h"
 #include "window.h"
+#include "event.h"
 
+#include <stdio.h>
+#include <stdlib.h>
 
 QuPoint window_position(QuWindow *win)
 {
@@ -28,4 +31,11 @@ void window_set_size(QuWindow *win, QuSize s)
     frame.size.width = s.width;
     frame.size.height = s.height;
     window_set_frame(win, frame);
+}
+
+void window_send_event(QuWindow *win, QuEvent e)
+{
+    char *es = event_str(e);
+    fprintf(stderr, "%s %s\n", __func__, es);
+    free(es);
 }

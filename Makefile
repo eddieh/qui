@@ -20,6 +20,7 @@ LIB_OBJS += src/list.o
 LIB_OBJS += src/rect.o
 LIB_OBJS += src/color.o
 LIB_OBJS += src/qui.o
+LIB_OBJS += src/event.o
 LIB_OBJS += src/app.o
 LIB_OBJS += src/window.o
 LIB_OBJS += src/view.o

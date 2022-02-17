@@ -1,6 +1,8 @@
 #import "QUIContentView.h"
 #import "context-private.h"
 #import "private.h"
+#import "platform.h"
+
 
 @interface QUIContentView () {
     QuWindow *_window;
@@ -57,6 +59,51 @@
 - (void)setDrawFunction:(void (*)(QuContext *, QuRect))df
 {
     _drawf = df;
+}
+
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+- (void)mouseDown:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
+}
+
+- (void)rightMouseDown:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
+}
+
+- (void)otherMouseDown:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
+}
+
+- (void)mouseUp:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
+}
+
+- (void)rightMouseUp:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
+}
+
+- (void)otherMouseUp:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
+}
+
+- (void)keyDown:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
+}
+
+- (void)keyUp:(NSEvent *)e
+{
+    window_send_event(_window, NSEvent_toQuEvent(e));
 }
 
 @end

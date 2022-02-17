@@ -73,6 +73,7 @@ int __app_default_menu(QuApp *a)
     NSMenuItem *appMenuItem, *quitMenuItem;
 
     menubar = [[NSMenu new] autorelease];
+
     appMenuItem = [[NSMenuItem new] autorelease];
     appMenu = [[NSMenu new] autorelease];
     quitMenuItem = [[NSMenuItem new] autorelease];

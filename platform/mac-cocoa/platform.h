@@ -28,3 +28,5 @@ QuRGBA NSColor_toQuRGBA(NSColor *c);
 
 CGColorRef QuRGBA_toCGColorRef(QuRGBA c);
 QuRGBA CGColorRef_toQuRGBA(CGColorRef c);
+
+QuEvent NSEvent_toQuEvent(NSEvent *e);

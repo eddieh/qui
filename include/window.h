@@ -4,6 +4,7 @@
 #include "context.h"
 #include "rect.h"
 #include "view.h"
+#include "event.h"
 
 typedef struct QuWindow QuWindow;
 
@@ -35,5 +36,7 @@ void window_center(QuWindow *win);
 void window_add_subview(QuWindow *win, QuView *view);
 size_t window_subview_count(QuWindow *win);
 QuView *window_subview_at(QuWindow *win, size_t idx);
+
+void window_send_event(QuWindow *win, QuEvent e);
 
 #endif /* WINDOW_H */
