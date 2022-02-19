@@ -25,6 +25,7 @@ example/draw
 example/text
 example/button
 example/subview
+example/window-event
 
 platform/mac-cocoa/simple
 

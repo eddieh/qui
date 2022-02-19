@@ -95,3 +95,78 @@ void view_add_subview(QuView *v, QuView *subview)
 
     list_push(v->children, subview);
 }
+
+int is_point_in_view(QuPoint p, QuView *v)
+{
+    QuRect f;
+    f = view_rect_in_window_coords(v, view_frame(v));
+    return is_point_in_rect(p, f);
+}
+
+QuRect view_rect_in_window_coords(QuView *v, QuRect r)
+{
+    QuPoint d;
+    QuViewPrivate *cv;
+
+    d = QuPointZero;
+    cv = private_view(v);
+    d.x += cv->frame.origin.x;
+    d.y += cv->frame.origin.y;
+
+    while ((cv = cv->parent)) {
+        d.x += cv->frame.origin.x;
+        d.y += cv->frame.origin.y;
+    }
+
+    return QuRectS(r.origin.x + d.x,
+        r.origin.y + d.y,
+        r.size.width,
+        r.size.height);
+}
+
+void view_set_event_func(QuView *v, int et,
+    void (*ef)(QuView *, QuEvent))
+{
+    assert(et >= 0);
+    assert(et <= 4);
+
+    v->ev_table[et] = ef;
+}
+
+void view_remove_event_func(QuView *v, int et)
+{
+    assert(et >= 0);
+    assert(et <= 4);
+
+    v->ev_table[et] = NULL;
+}
+
+QuView *view_hit_test(QuView *v, QuPoint p)
+{
+    size_t svcount;
+    QuView *cv, *deepest;
+
+    deepest = v;
+    svcount = list_count(v->children);
+    for (size_t i = 0; i < svcount; i++) {
+        cv = list_at(v->children, i);
+        if (is_point_in_view(p, cv)) {
+            deepest = view_hit_test(cv, p);
+        }
+    }
+
+    return deepest;
+}
+
+void view_send_event(QuView *v, QuEvent e)
+{
+    assert(e.type >= 0);
+    assert(e.type <= 4);
+
+    if (v->ev_table[e.type])
+        v->ev_table[e.type](v, e);
+    else if (v->parent)
+        view_send_event(v->parent, e);
+    else if (v->window)
+        _window_send_event(v->window, e);
+}

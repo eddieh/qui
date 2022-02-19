@@ -53,7 +53,6 @@
         view_draw(cv, _context, dirty);
         _QuContext_set_current_view(_context, NULL);
     }
-
 }
 
 - (void)setDrawFunction:(void (*)(QuContext *, QuRect))df

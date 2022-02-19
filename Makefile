@@ -37,6 +37,7 @@ EXAMPLES += example/draw
 EXAMPLES += example/text
 EXAMPLES += example/button
 EXAMPLES += example/subview
+EXAMPLES += example/window-event
 
 PROGRAMS :=
 PROGRAMS += $(TESTS) $(EXAMPLES)

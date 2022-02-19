@@ -21,11 +21,11 @@ typedef struct QuEvent {
 } QuEvent;
 
 enum {
-    QuEvent_Unknown,
-    QuEvent_MouseDown,
-    QuEvent_MouseUp,
-    QuEvent_KeyDown,
-    QuEvent_KeyUp,
+    QuEvent_Unknown = -1,
+    QuEvent_MouseDown = 0,
+    QuEvent_MouseUp = 1,
+    QuEvent_KeyDown = 2,
+    QuEvent_KeyUp = 3,
 };
 
 /* caller is responsible for freeing */

@@ -1,6 +1,8 @@
 #ifndef PRIVATE_H
 #define PRIVATE_H
 
+#include "list.h"
+
 struct QuViewPrivate {
     QuWindow *window;
     QuView *parent;
@@ -8,6 +10,7 @@ struct QuViewPrivate {
     void (*drawf)(QuContext *, QuRect);
     QuRect frame;
     QuRect bounds;
+    void (*ev_table[4])(QuView *, QuEvent);
 };
 
 typedef struct QuViewPrivate QuViewPrivate;

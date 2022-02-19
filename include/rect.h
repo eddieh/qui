@@ -60,6 +60,48 @@ QuVector QuVectorZero;
 QuSize QuSizeZero;
 QuRect QuRectZero;
 
+inline float qu_maxx(QuRect r)
+{
+    return r.origin.x + r.size.width;
+}
+
+inline float qu_maxy(QuRect r)
+{
+    return r.origin.y + r.size.height;
+}
+
+inline float qu_midx(QuRect r)
+{
+    return r.origin.x + r.size.width * 0.5f;
+}
+
+inline float qu_midy(QuRect r)
+{
+    return r.origin.y + r.size.height * 0.5f;
+}
+
+inline float qu_minx(QuRect r)
+{
+    return r.origin.x;
+}
+
+inline float qu_miny(QuRect r)
+{
+    return r.origin.y;
+}
+
+inline float qu_w(QuRect r)
+{
+    return r.size.width;
+}
+
+inline float qu_h(QuRect r)
+{
+    return r.size.height;
+}
+
+int is_point_in_rect(QuPoint p, QuRect r);
+
 /* caller is responsible for freeing */
 char *rect_str(QuRect r);
 

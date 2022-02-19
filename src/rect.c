@@ -28,6 +28,13 @@ QuRect QuRectZero = {
     }
 };
 
+int is_point_in_rect(QuPoint p, QuRect r)
+{
+    if (p.x >= qu_minx(r) && p.x <= qu_maxx(r))
+        return p.y >= qu_miny(r) && p.y <= qu_maxy(r);
+    return 0;
+}
+
 char *rect_str(QuRect r)
 {
     char *ret;

@@ -1,6 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <stdlib.h>
+
 #include "context.h"
 #include "rect.h"
 #include "view.h"
@@ -37,6 +39,12 @@ void window_add_subview(QuWindow *win, QuView *view);
 size_t window_subview_count(QuWindow *win);
 QuView *window_subview_at(QuWindow *win, size_t idx);
 
+void window_set_event_func(QuWindow *win, int et,
+    void (*ef)(QuWindow *, QuEvent));
+void window_remove_event_func(QuWindow *win, int et);
 void window_send_event(QuWindow *win, QuEvent e);
+void _window_send_event(QuWindow *win, QuEvent e);
+
+QuView *window_hit_test(QuWindow *win, QuPoint p);
 
 #endif /* WINDOW_H */

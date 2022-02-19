@@ -7,9 +7,10 @@
 #import "QUIContentView.h"
 
 struct QuWindow {
-    QuList *children;
     NSWindow *_win;
     QUIContentView *_contentView;
+    QuList *children;
+    void (*ev_table[4])(QuWindow *, QuEvent);
 };
 
 QuWindow *QuWindowA()
@@ -18,6 +19,7 @@ QuWindow *QuWindowA()
     NSWindowStyleMask style;
     NSColor *bg;
     QuWindow *win = malloc(sizeof(QuWindow));
+    memset(win, 0, sizeof(QuWindow));
 
     rect = NSMakeRect(320, 350, 480, 320);
     style = NSWindowStyleMaskTitled;
@@ -128,4 +130,30 @@ size_t window_subview_count(QuWindow *win)
 QuView *window_subview_at(QuWindow *win, size_t idx)
 {
     return list_at(win->children, idx);
+}
+
+void window_set_event_func(QuWindow *win, int et,
+    void (*ef)(QuWindow *, QuEvent))
+{
+    assert(et >= 0);
+    assert(et <= 4);
+
+    win->ev_table[et] = ef;
+}
+
+void window_remove_event_func(QuWindow *win, int et)
+{
+    assert(et >= 0);
+    assert(et <= 4);
+
+    win->ev_table[et] = NULL;
+}
+
+void _window_send_event(QuWindow *win, QuEvent e)
+{
+    assert(e.type >= 0);
+    assert(e.type <= 4);
+
+    if (win->ev_table[e.type])
+        win->ev_table[e.type](win, e);
 }

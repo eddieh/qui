@@ -38,4 +38,31 @@ void window_send_event(QuWindow *win, QuEvent e)
     char *es = event_str(e);
     fprintf(stderr, "%s %s\n", __func__, es);
     free(es);
+
+    QuView *deepest;
+
+    deepest = window_hit_test(win, e.loc);
+    if (!deepest) {
+        _window_send_event(win, e);
+    } else
+        view_send_event(deepest, e);
+}
+
+QuView *window_hit_test(QuWindow *win, QuPoint p)
+{
+    QuView *cv, *deepest;
+    size_t svcount;
+
+    cv = NULL;
+    deepest = NULL;
+
+    svcount = window_subview_count(win);
+    for (size_t i = 0; i < svcount; i++) {
+        cv = window_subview_at(win, i);
+        if (is_point_in_view(p, cv)) {
+            deepest = view_hit_test(cv, p);
+        }
+    }
+
+    return deepest;
 }

@@ -16,8 +16,7 @@ struct QuContext {
 
 CGRect cg_rect_in_context(QuContext *ctx, QuRect r)
 {
-    QuPoint d;
-    QuViewPrivate *cv;
+    QuRect wr;
 
     if (!ctx->current_view)
         return CGRectMake(r.origin.x,
@@ -25,20 +24,12 @@ CGRect cg_rect_in_context(QuContext *ctx, QuRect r)
             r.size.width,
             r.size.height);
 
-    d = QuPointZero;
-    cv = private_view(ctx->current_view);
-    d.x += cv->frame.origin.x;
-    d.y += cv->frame.origin.y;
+    wr = view_rect_in_window_coords(ctx->current_view, r);
 
-    while ((cv = cv->parent)) {
-        d.x += cv->frame.origin.x;
-        d.y += cv->frame.origin.y;
-    }
-
-    return CGRectMake(r.origin.x + d.x,
-        r.origin.y + d.y,
-        r.size.width,
-        r.size.height);
+    return CGRectMake(wr.origin.x,
+        wr.origin.y,
+        wr.size.width,
+        wr.size.height);
 }
 
 QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view)
