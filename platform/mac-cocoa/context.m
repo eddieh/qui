@@ -144,13 +144,13 @@ void draw_text(QuContext *ctx, const char *text, QuPoint pos)
 void draw_button(QuContext *ctx, QuRect r)
 {
     CGRect cgr;
-    cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    cgr = cg_rect_in_context(ctx, r);
     NSDrawButton(cgr, cgr);
 }
 
 void draw_button_pushed(QuContext *ctx, QuRect r)
 {
     CGRect cgr;
-    cgr = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height);
+    cgr = cg_rect_in_context(ctx, r);
     NSDrawGrayBezel(cgr, cgr);
 }

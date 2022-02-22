@@ -1,6 +1,6 @@
 #include "qui.h"
 
-void draw(QuContext *ctx, QuRect dirty)
+void draw(QuWindow * win, QuContext *ctx)
 {
     QuRect box = QuRectS(42, 42, 200, 100);
 

@@ -3,7 +3,7 @@
 QuWindow *win;
 QuView *subview, *sv1, *sv2;
 
-void draw(QuContext *ctx, QuRect dirty)
+void draw(QuView *view, QuContext *ctx)
 {
     QuRect bounds;
 
@@ -15,7 +15,7 @@ void draw(QuContext *ctx, QuRect dirty)
     stroke_rect(ctx, bounds);
 }
 
-void drawsv(QuContext *ctx, QuRect dirty)
+void drawsv(QuView *view, QuContext *ctx)
 {
     QuRect bounds;
 

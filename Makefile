@@ -28,6 +28,7 @@ LIB_OBJS += src/event.o
 LIB_OBJS += src/app.o
 LIB_OBJS += src/window.o
 LIB_OBJS += src/view.o
+LIB_OBJS += src/button.o
 
 TESTS :=
 TESTS += test/list

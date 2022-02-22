@@ -10,6 +10,7 @@ struct QuWindow {
     NSWindow *_win;
     QUIContentView *_contentView;
     QuList *children;
+    QuView *focused, *tracked;
     void (*ev_table[4])(QuWindow *, QuEvent);
 };
 
@@ -58,9 +59,14 @@ void window_close(QuWindow *win)
 }
 
 void window_draw_func(QuWindow *win,
-    void (*df)(QuContext *, QuRect))
+    void (*df)(QuWindow *, QuContext *))
 {
     [win->_contentView setDrawFunction:df];
+}
+
+void window_redraw(QuWindow *win)
+{
+    [win->_contentView setNeedsDisplay:YES];
 }
 
 QuRGBA window_background_color(QuWindow *win)
@@ -156,4 +162,24 @@ void _window_send_event(QuWindow *win, QuEvent e)
 
     if (win->ev_table[e.type])
         win->ev_table[e.type](win, e);
+}
+
+QuView *window_focused_view(QuWindow *win)
+{
+    return win->focused;
+}
+
+void window_set_focused_view(QuWindow *win, QuView *view)
+{
+    win->focused = view;
+}
+
+QuView *window_tracking_view(QuWindow *win)
+{
+    return win->tracked;
+}
+
+void window_set_tracking_view(QuWindow *win, QuView *view)
+{
+    win->tracked = view;
 }

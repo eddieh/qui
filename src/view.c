@@ -19,26 +19,31 @@ QuView *QuViewA()
 }
 
 void view_draw_func(QuView *v,
-    void (*df)(QuContext *, QuRect))
+    void (*df)(QuView *, QuContext *))
 {
     v->drawf = df;
 }
 
-void view_draw(QuView *v, QuContext *c, QuRect dirty)
+void view_draw(QuView *v, QuContext *c)
 {
     size_t svcount;
     QuView *cv;
 
     if (v->drawf)
-        v->drawf(c, dirty);
+        v->drawf(v, c);
 
     svcount = list_count(v->children);
     for (size_t i = 0; i < svcount; i++) {
         cv = list_at(v->children, i);
         _QuContext_set_current_view(c, cv);
-        view_draw(cv, c, dirty);
+        view_draw(cv, c);
         _QuContext_set_current_view(c, NULL);
     }
+}
+
+void view_redraw(QuView *v)
+{
+    window_redraw(v->window);
 }
 
 QuPoint view_position(QuView *v)
@@ -99,7 +104,7 @@ void view_add_subview(QuView *v, QuView *subview)
 int is_point_in_view(QuPoint p, QuView *v)
 {
     QuRect f;
-    f = view_rect_in_window_coords(v, view_frame(v));
+    f = view_rect_in_window_coords(v, view_bounds(v));
     return is_point_in_rect(p, f);
 }
 

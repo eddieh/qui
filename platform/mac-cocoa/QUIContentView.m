@@ -7,7 +7,7 @@
 @interface QUIContentView () {
     QuWindow *_window;
     QuContext *_context;
-    void (*_drawf)(QuContext *, QuRect);
+    void (*_drawf)(QuWindow *, QuContext *);
 }
 @end
 
@@ -44,18 +44,18 @@
                  dirtyRect.size.height);
 
     if (_drawf)
-        _drawf(_context, dirty);
+        _drawf(_window, _context);
 
     svcount = window_subview_count(_window);
     for (size_t i = 0; i < svcount; i++) {
         cv = window_subview_at(_window, i);
         _QuContext_set_current_view(_context, cv);
-        view_draw(cv, _context, dirty);
+        view_draw(cv, _context);
         _QuContext_set_current_view(_context, NULL);
     }
 }
 
-- (void)setDrawFunction:(void (*)(QuContext *, QuRect))df
+- (void)setDrawFunction:(void (*)(QuWindow *, QuContext *))df
 {
     _drawf = df;
 }

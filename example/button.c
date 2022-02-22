@@ -1,15 +1,18 @@
 #include "qui.h"
+#include <stdio.h>
 
-void draw(QuContext *ctx, QuRect dirty)
+void btn_action_cb(QuButton *btn, QuEvent e)
 {
-    draw_button(ctx, QuRectS(42, 78, 100, 24));
-    draw_button_pushed(ctx, QuRectS(42, 42, 100, 24));
+    fprintf(stderr, "HIT ME!\n");
 }
 
 int app_init_cb(QuApp *app)
 {
     QuWindow *win = QuWindowA();
-    window_draw_func(win, draw);
+    QuButton *btn = QuButtonA();
+    view_set_frame(btn, QuRectS(32, 32, 128, 32));
+    button_set_action_func(btn, btn_action_cb);
+    window_add_subview(win, btn);
     window_show(win);
     return 1;
 }

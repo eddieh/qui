@@ -10,8 +10,9 @@ typedef struct QuViewPrivate QuView;
 QuView *QuViewA();
 
 void view_draw_func(QuView *v,
-    void (*df)(QuContext *, QuRect));
-void view_draw(QuView *v, QuContext *c, QuRect dirty);
+    void (*df)(QuView *v, QuContext *));
+void view_draw(QuView *v, QuContext *c);
+void view_redraw(QuView *v);
 
 QuPoint view_position(QuView *v);
 void view_set_position(QuView *v, QuPoint pos);
@@ -27,6 +28,9 @@ QuRect view_bounds(QuView *v);
 void view_add_subview(QuView *v, QuView *subview);
 
 int is_point_in_view(QuPoint p, QuView *v);
+
+/* translate a rect in view coordinates to a rect in window
+ * coordinates */
 QuRect view_rect_in_window_coords(QuView *v, QuRect r);
 
 void view_set_event_func(QuView *v, int et,

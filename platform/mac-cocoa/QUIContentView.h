@@ -4,5 +4,5 @@
 
 @interface QUIContentView : NSView
 - initWithFrame:(NSRect)frame window:(QuWindow *)window;
-- (void)setDrawFunction:(void (*)(QuContext *, QuRect))df;
+- (void)setDrawFunction:(void (*)(QuWindow *, QuContext *))df;
 @end

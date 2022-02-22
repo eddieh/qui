@@ -1,6 +1,7 @@
 #include "list.h"
 #include "window.h"
 #include "event.h"
+#include "private.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,17 +36,30 @@ void window_set_size(QuWindow *win, QuSize s)
 
 void window_send_event(QuWindow *win, QuEvent e)
 {
-    char *es = event_str(e);
-    fprintf(stderr, "%s %s\n", __func__, es);
-    free(es);
+    QuView *target = NULL;
+    /* char *es = event_str(e); */
+    /* fprintf(stderr, "%s %s\n", __func__, es); */
+    /* free(es); */
 
-    QuView *deepest;
+    switch (e.type) {
+    case QuEvent_MouseDown:
+        target = window_hit_test(win, e.loc);
+        window_set_tracking_view(win, target);
+        break;
+    case QuEvent_MouseUp:
+        target = window_tracking_view(win);
+        window_set_tracking_view(win, NULL);
+        break;
+    case QuEvent_KeyDown:
+    case QuEvent_KeyUp:
+        target = window_focused_view(win);
+        break;
+    }
 
-    deepest = window_hit_test(win, e.loc);
-    if (!deepest) {
+    if (target)
+        view_send_event(target, e);
+    else
         _window_send_event(win, e);
-    } else
-        view_send_event(deepest, e);
 }
 
 QuView *window_hit_test(QuWindow *win, QuPoint p)

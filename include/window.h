@@ -16,7 +16,8 @@ void window_show(QuWindow *win);
 void window_close(QuWindow *win);
 
 void window_draw_func(QuWindow *win,
-    void (*df)(QuContext *, QuRect));
+    void (*df)(QuWindow *, QuContext *));
+void window_redraw(QuWindow *win);
 
 QuRGBA window_background_color(QuWindow *win);
 void window_set_background_color(QuWindow *win, QuRGBA c);
@@ -46,5 +47,8 @@ void window_send_event(QuWindow *win, QuEvent e);
 void _window_send_event(QuWindow *win, QuEvent e);
 
 QuView *window_hit_test(QuWindow *win, QuPoint p);
+
+QuView *window_focused_view(QuWindow *win);
+void window_set_focused_view(QuWindow *win, QuView *view);
 
 #endif /* WINDOW_H */

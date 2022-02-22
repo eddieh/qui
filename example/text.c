@@ -1,6 +1,6 @@
 #include "qui.h"
 
-void draw(QuContext *ctx, QuRect dirty)
+void draw(QuWindow *win, QuContext *ctx)
 {
     draw_text(ctx, "Quick and easy.", QuPointS(42, 42));
 }
