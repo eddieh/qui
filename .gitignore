@@ -31,8 +31,8 @@ platform/mac-cocoa/simple
 
 
 # tags
-tags
-TAGS
+/tags
+/TAGS
 
 # stgit generated dirs
 patches-*

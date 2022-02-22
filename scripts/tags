@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#set -x
+
+srctree="${srctree}/src ${srctree}/platform/mac-cocoa"
+
+ignore=""
+#ignore="$ignore ( -path ${srctree}/xorg/xserver/hw/xquartz ) -prune -o"
+
+find $srctree $ignore -name "*.[chm]" -print | etags -

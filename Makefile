@@ -14,6 +14,10 @@ DESTDIR ?=
 DFRAME_LOCAL_CONFIG ?= local.mk
 -include ${DFRAME_LOCAL_CONFIG}
 
+SRCROOT = .
+ABS_SRCROOT := $(shell cd $(SRCROOT) && pwd)
+srctree := $(ABS_SRCROOT)
+
 LIB_OBJS :=
 LIB_OBJS += src/util.o
 LIB_OBJS += src/list.o
@@ -45,6 +49,8 @@ PROGRAMS += $(TESTS) $(EXAMPLES)
 MODULES :=
 
 PLATFORM_PATH ?=
+
+export srctree
 
 all:
 
@@ -93,6 +99,9 @@ cflags += $($(*)-cflags) $(CPPFLAGS) $(CFLAGS)
 	@echo "  CC      $@"
 	$(Q)$(CC) $(cflags) -c -o $@ $<
 
+tags TAGS t: FORCE
+	scripts/tags
+
 clean:
 	@for dir in $(MODULES); do ${MAKE} clean -C $$dir; exit_status=$$?; \
 	if [ $$exit_status -ne 0 ]; then exit $$exit_status; fi; done
@@ -100,4 +109,4 @@ clean:
 	@rm -f src/*.[oa] $(PROGRAMS)
 	@rm -f test/*.[oa] example/*.[oa]
 
-.PHONY: submodules clean
+.PHONY: submodules clean FORCE
