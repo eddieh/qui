@@ -118,7 +118,8 @@ QuRect text_bounds(QuContext *ctx, QuFont *font, const char *text)
     cgctx = ctx->_context;
     styled = _cf_attributed_string(font, text);
     line = CTLineCreateWithAttributedString(styled);
-    bounds = CTLineGetImageBounds(line, cgctx);
+    //bounds = CTLineGetImageBounds(line, cgctx);
+    bounds = CTLineGetBoundsWithOptions(line, 0);
 
     CFRelease(line);
     CFRelease(styled);

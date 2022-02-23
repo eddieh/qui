@@ -78,6 +78,11 @@ void button_set_action_func(QuButton *btn,
     btn->actionf = af;
 }
 
+const char *button_title(QuButton *btn)
+{
+    return button_state(btn)->title;
+}
+
 void button_set_title(QuButton *btn, const char *title)
 {
     if (button_state(btn)->title)

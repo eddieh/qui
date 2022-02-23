@@ -42,7 +42,7 @@ QuFont *QuFontButtonA()
     return _QuFontA_ct_font(ct_font);
 }
 
-QuFont *QuFontA(char *name, float size)
+QuFont *QuFontA(const char *name, float size)
 {
     CFStringRef cf_name;
     CTFontRef ct_font;

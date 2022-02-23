@@ -26,7 +26,6 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     CGContextRef cgctx;
-    QuRect dirty;
     QuView *cv;
     size_t svcount;
 
@@ -37,11 +36,6 @@
             [self window],
             self);
     }
-
-    dirty = QuRectS(dirtyRect.origin.x,
-                 dirtyRect.origin.y,
-                 dirtyRect.size.width,
-                 dirtyRect.size.height);
 
     if (_drawf)
         _drawf(_window, _context);
