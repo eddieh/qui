@@ -12,6 +12,7 @@ int app_init_cb(QuApp *app)
     QuButton *btn = QuButtonA();
     view_set_frame(btn, QuRectS(32, 32, 128, 32));
     button_set_action_func(btn, btn_action_cb);
+    button_set_title(btn, "Hit me!");
     window_add_subview(win, btn);
     window_show(win);
     return 1;

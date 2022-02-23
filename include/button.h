@@ -10,7 +10,10 @@ QuButton *QuButtonA();
 
 void button_set_action_func(QuButton *btn,
     void (*af)(QuButton *, QuEvent));
-void button_set_title(QuButton *btn, char *title);
+
+/* makes a copy of title, caller is responsible for freeing the
+ * argument if it was dynamically allocated */
+void button_set_title(QuButton *btn, const char *title);
 
 void button_free(QuButton *btn);
 

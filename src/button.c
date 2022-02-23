@@ -21,15 +21,24 @@ QuButtonState *QuButtonStateA()
 
 #define button_state(x) ((QuButtonState *)x->state)
 
-/* TODO: draw title */
 void button_draw_cb(QuButton *btn, QuContext *ctx)
 {
-    QuRect bounds;
+    QuRect bounds, tb;
+    static QuFont *bf;
+
     bounds = view_bounds(btn);
     if (button_state(btn)->pressed)
         draw_button_pushed(ctx, bounds);
     else
         draw_button(ctx, bounds);
+
+    if (!bf)
+        bf = QuFontButtonA();
+
+    tb = text_bounds(ctx, bf, button_state(btn)->title);
+    tb.origin.x = qu_midx(bounds) - qu_midx(tb);
+    tb.origin.y = qu_midy(bounds) - qu_midy(tb);
+    draw_text(ctx, bf, button_state(btn)->title, tb.origin);
 }
 
 void button_mousedown_cb(QuButton *btn, QuEvent e)
@@ -69,8 +78,15 @@ void button_set_action_func(QuButton *btn,
     btn->actionf = af;
 }
 
-void button_set_title(QuButton *btn, char *title)
+void button_set_title(QuButton *btn, const char *title)
 {
+    if (button_state(btn)->title)
+        free(button_state(btn)->title);
+
+    if (title)
+        button_state(btn)->title = strdup(title);
+    else
+        button_state(btn)->title = strdup("");
 }
 
 void button_free(QuButton *btn)

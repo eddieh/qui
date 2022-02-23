@@ -5,6 +5,7 @@
 #import "qui.h"
 #import "platform.h"
 #import "context-private.h"
+#import "font-private.h"
 #import "private.h"
 
 struct QuContext {
@@ -34,7 +35,7 @@ CGRect cg_rect_in_context(QuContext *ctx, QuRect r)
 
 QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view)
 {
-    QuContext *ctx = malloc(sizeof(QuContext));
+    QuContext *ctx = calloc(1, sizeof(QuContext));
     ctx->_context = cg;
     ctx->_window = win;
     ctx->_view = view;
@@ -88,37 +89,11 @@ void stroke_rect(QuContext *ctx, QuRect r)
     CGContextStrokeRect(cgctx, cgr);
 }
 
-void draw_text(QuContext *ctx, const char *text, QuPoint pos)
+// caller must free
+CFAttributedStringRef _cf_attributed_string(QuFont *font, const char *text)
 {
-    CGContextRef cgctx;
     CFStringRef str;
-    CFStringRef keys[1];
-    CFTypeRef values[1];
-    CFDictionaryRef attrs;
     CFAttributedStringRef styled;
-    CTFontRef font;
-    CTLineRef line;
-
-    cgctx = ctx->_context;
-
-    font = CTFontCreateUIFontForLanguage(
-        kCTFontUIFontPushButton,
-        0,
-        NULL
-    );
-
-    keys[0] = kCTFontAttributeName;
-    values[0] = font;
-
-    attrs = CFDictionaryCreate(
-        kCFAllocatorDefault,
-        (const void**)keys,
-        (const void**)values,
-        sizeof(keys) / sizeof(keys[0]),
-        &kCFTypeDictionaryKeyCallBacks,
-        &kCFTypeDictionaryValueCallBacks
-    );
-
     str = CFStringCreateWithCString(
         kCFAllocatorDefault,
         text,
@@ -127,18 +102,46 @@ void draw_text(QuContext *ctx, const char *text, QuPoint pos)
     styled = CFAttributedStringCreate(
         kCFAllocatorDefault,
         str,
-        attrs
+        font->_attrs
     );
-    line = CTLineCreateWithAttributedString(styled);
+    CFRelease(str);
+    return styled;
+}
 
-    CGContextSetTextPosition(cgctx, pos.x, pos.y);
+QuRect text_bounds(QuContext *ctx, QuFont *font, const char *text)
+{
+    CGContextRef cgctx;
+    CFAttributedStringRef styled;
+    CTLineRef line;
+    CGRect bounds;
+
+    cgctx = ctx->_context;
+    styled = _cf_attributed_string(font, text);
+    line = CTLineCreateWithAttributedString(styled);
+    bounds = CTLineGetImageBounds(line, cgctx);
+
+    CFRelease(line);
+    CFRelease(styled);
+
+    return CGRect_toQuRect(bounds);
+}
+
+void draw_text(QuContext *ctx, QuFont *font, const char *text, QuPoint pos)
+{
+    CGContextRef cgctx;
+    CFAttributedStringRef styled;
+    CTLineRef line;
+    CGRect cgr;
+
+    cgctx = ctx->_context;
+    styled = _cf_attributed_string(font, text);
+    line = CTLineCreateWithAttributedString(styled);
+    cgr = cg_rect_in_context(ctx, QuRectS(pos.x, pos.y, 0, 0));
+    CGContextSetTextPosition(cgctx, cgr.origin.x, cgr.origin.y);
     CTLineDraw(line, cgctx);
 
     CFRelease(line);
     CFRelease(styled);
-    CFRelease(str);
-    CFRelease(attrs);
-    CFRelease(font);
 }
 
 void draw_button(QuContext *ctx, QuRect r)

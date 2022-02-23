@@ -68,6 +68,24 @@ QuRect NSRect_toQuRect(NSRect r)
         r.size.height);
 }
 
+CGRect QuRect_toCGRect(QuRect r)
+{
+    return CGRectMake(
+        r.origin.x,
+        r.origin.y,
+        r.size.width,
+        r.size.height);
+}
+
+QuRect CGRect_toQuRect(CGRect r)
+{
+    return QuRectS(
+        r.origin.x,
+        r.origin.y,
+        r.size.width,
+        r.size.height);
+}
+
 NSColor *QuRGBA_toNSColor(QuRGBA c)
 {
     return [[NSColor colorWithRed:c.red

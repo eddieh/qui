@@ -6,6 +6,7 @@
 #include "color.h"
 #include "context.h"
 #include "event.h"
+#include "font.h"
 #include "list.h"
 #include "rect.h"
 #include "util.h"

@@ -2,7 +2,9 @@
 
 void draw(QuWindow *win, QuContext *ctx)
 {
-    draw_text(ctx, "Quick and easy.", QuPointS(42, 42));
+    QuFont *font = QuFontA("Times New Roman", 24);
+    draw_text(ctx, font, "Quick and easy.", QuPointS(42, 42));
+    font_free(font);
 }
 
 int app_init_cb(QuApp *app)

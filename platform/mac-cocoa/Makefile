@@ -22,6 +22,7 @@ LIB_OBJS += QUIContentView.o
 LIB_OBJS += app.o
 LIB_OBJS += window.o
 LIB_OBJS += context.o
+LIB_OBJS += font.o
 
 TESTS :=
 
