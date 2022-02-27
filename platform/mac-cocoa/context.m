@@ -6,6 +6,7 @@
 #import "platform.h"
 #import "context-private.h"
 #import "font-private.h"
+#import "path-private.h"
 #import "private.h"
 
 struct QuContext {
@@ -31,6 +32,21 @@ CGRect cg_rect_in_context(QuContext *ctx, QuRect r)
         wr.origin.y,
         wr.size.width,
         wr.size.height);
+}
+
+CGAffineTransform cg_trasform_in_context(QuContext *ctx, QuPath *p)
+{
+    CGPathRef path;
+    CGRect bb;
+    QuRect wr;
+
+    if (!ctx->current_view)
+        return CGAffineTransformIdentity;
+
+    path = p->_path;
+    bb = CGPathGetPathBoundingBox(path);
+    wr = view_rect_in_window_coords(ctx->current_view, CGRect_toQuRect(bb));
+    return CGAffineTransformMakeTranslation(wr.origin.x, wr.origin.y);
 }
 
 QuContext *_QuContextA(CGContextRef cg, NSWindow *win, NSView *view)
@@ -68,6 +84,21 @@ void fill_rect(QuContext *ctx, QuRect r)
     CGContextFillRect(cgctx, cgr);
 }
 
+void fill_path(QuContext *ctx, QuPath *p)
+{
+    CGContextRef cgctx;
+    CGAffineTransform t;
+    CGPathRef path;
+
+    cgctx = ctx->_context;
+    t = cg_trasform_in_context(ctx, p);
+    path = CGPathCreateMutableCopyByTransformingPath(p->_path, &t);
+    CGContextBeginPath(cgctx);
+    CGContextAddPath(cgctx, path);
+    CGContextFillPath(cgctx);
+    CGPathRelease(path);
+}
+
 void stroke_color(QuContext *ctx, QuRGBA c)
 {
     CGContextRef cgctx;
@@ -87,6 +118,21 @@ void stroke_rect(QuContext *ctx, QuRect r)
     cgctx = ctx->_context;
     cgr = cg_rect_in_context(ctx, r);
     CGContextStrokeRect(cgctx, cgr);
+}
+
+void stroke_path(QuContext *ctx, QuPath *p)
+{
+    CGContextRef cgctx;
+    CGAffineTransform t;
+    CGMutablePathRef path;
+
+    cgctx = ctx->_context;
+    t = cg_trasform_in_context(ctx, p);
+    path = CGPathCreateMutableCopyByTransformingPath(p->_path, &t);
+    CGContextBeginPath(cgctx);
+    CGContextAddPath(cgctx, path);
+    CGContextStrokePath(cgctx);
+    CGPathRelease(path);
 }
 
 // caller must free
@@ -157,4 +203,9 @@ void draw_button_pushed(QuContext *ctx, QuRect r)
     CGRect cgr;
     cgr = cg_rect_in_context(ctx, r);
     NSDrawGrayBezel(cgr, cgr);
+}
+
+void line_width(QuContext *ctx, float w)
+{
+    CGContextSetLineWidth(ctx->_context, w);
 }

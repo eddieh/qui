@@ -8,6 +8,7 @@
 #include "event.h"
 #include "font.h"
 #include "list.h"
+#include "path.h"
 #include "rect.h"
 #include "util.h"
 #include "view.h"

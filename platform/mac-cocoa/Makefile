@@ -23,6 +23,7 @@ LIB_OBJS += app.o
 LIB_OBJS += window.o
 LIB_OBJS += context.o
 LIB_OBJS += font.o
+LIB_OBJS += path.o
 
 TESTS :=
 

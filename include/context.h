@@ -4,14 +4,17 @@
 #include "color.h"
 #include "rect.h"
 #include "font.h"
+#include "path.h"
 
 typedef struct QuContext QuContext;
 
 void fill_color(QuContext *ctx, QuRGBA c);
 void fill_rect(QuContext *ctx, QuRect r);
+void fill_path(QuContext *ctx, QuPath *p);
 
 void stroke_color(QuContext *ctx, QuRGBA c);
 void stroke_rect(QuContext *ctx, QuRect r);
+void stroke_path(QuContext *ctx, QuPath *p);
 
 QuRect text_bounds(QuContext *ctx, QuFont *font, const char *text);
 void draw_text(QuContext *ctx, QuFont *font, const char *text, QuPoint pos);
