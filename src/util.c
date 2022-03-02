@@ -4,7 +4,7 @@
 
 #include "util.h"
 
-void qui_die(const char *fmt, ...)
+void qu_die(const char *fmt, ...)
 {
     va_list args;
     static char buffer[512];

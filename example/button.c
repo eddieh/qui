@@ -6,7 +6,7 @@ void btn_action_cb(QuButton *btn, QuEvent e)
     fprintf(stderr, "[action] %s\n", button_title(btn));
 }
 
-int app_init_cb(QuApp *app)
+void app_init_cb(QuApp *app)
 {
     QuWindow *win = QuWindowA();
 
@@ -23,11 +23,9 @@ int app_init_cb(QuApp *app)
     window_add_subview(win, btn2);
 
     window_show(win);
-
-    return 1;
 }
 
 int main(int argc, char **argv)
 {
-    return qui_main_init(argc, argv, app_init_cb);
+    return qu_main(argc, argv, app_init_cb);
 }

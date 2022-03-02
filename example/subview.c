@@ -27,7 +27,7 @@ void drawsv(QuView *view, QuContext *ctx)
     stroke_rect(ctx, bounds);
 }
 
-int init(QuApp *app)
+void init(QuApp *app)
 {
     win = QuWindowA();
     window_set_frame(win, QuRectS(0, 0, 320, 360));
@@ -49,11 +49,9 @@ int init(QuApp *app)
     view_add_subview(subview, sv2);
 
     window_show(win);
-
-    return 1;
 }
 
 int main(int argc, char **argv)
 {
-    return qui_main_init(argc, argv, init);
+    return qu_main(argc, argv, init);
 }

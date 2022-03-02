@@ -2,6 +2,8 @@
 #+DATE: 2020-07-16
 #+STARTUP: showall
 
+[[./assets/logo.png]]
+
 QUI is a quick and simple user interface library for C.
 
 The library is meant to be extremely simple to drop into a project and
@@ -10,7 +12,7 @@ debugging. It isn't a desktop environment or a full featured widget
 library. Use it when you need basic windows, drawing primitives, and
 maybe a button or two.
 
-The only documentation is the README. The README contains everything
+The only documentation is this README. The README contains everything
 you'll ever need when using QUI: how to use it, how to build it, how
 to hack it, a tutorial, and a complete reference.
 
@@ -26,12 +28,44 @@ Small structs are created on the stack and no manual memory management
 is needed, they end with a =S=.
 
 #+begin_src c
-  QuApp *app = QuAppA(); // A = allocate on the heap
-  QuRect rect = QuRectS(); // S = staticly allocate or allocate on the stack
+  QuApp *app = QuAppA(); // A = allocate in the heap
+  QuRect rect = QuRectS(); // S = stack allocation
 #+end_src
 
-Types are names such that they follow the form PrefixType where Qu is
-the prefix and type is App, Window, View, etc.
+Types are names that follow the convention =Qu=​/TypeName/ where =Qu=
+is the prefix and /TypeName/ is App, Window, View, etc. in [[https://wiki.c2.com/?PascalCase][PascalCase]].
 
 Functions begin with the lowercase type name without the prefix and
-/always/ take an object of the named type as the first argument.
+take an object of the named type as the first argument.
+
+#+begin_src c
+void button_set_title(QuButton *btn, const char *title);
+void path_line_to(QuPath *path, QuPoint pos);
+#+end_src
+
+The exceptions are graphics context functions like =fill_path=,
+=stroke_rect=, and others when the names are not likely to collide;
+functions that do not operate on QUI types like =qu_main=; and utility
+functions that would otherwise be clunky if the names were too long
+like =qu_w= and =qu_midx=.
+
+** Hello, QUI
+
+The simplest QUI program is
+
+#+begin_src c
+#include "qui.h"
+
+int main(int argc, char **argv)
+{
+    return qu_main(argc, argv, NULL);
+}
+#+end_src
+
+On macOS this creates an program with a default dock icon, a default
+menu bar, and a default window.
+
+[[./assets/simplest.png]]
+
+While the program is completely functional, it isn't very interesting.
+You can move the window and quit---that's about it.

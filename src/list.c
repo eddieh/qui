@@ -22,7 +22,7 @@ QuList *QuListA(size_t size)
 void list_insert(QuList *lst, void *obj, size_t idx)
 {
     if (idx > lst->count)
-        qui_die("index %d beyond count %d of list %p", idx, lst->count, lst);
+        qu_die("index %d beyond count %d of list %p", idx, lst->count, lst);
 
     lst->count++;
     if (lst->count > lst->size) {
@@ -42,7 +42,7 @@ void *list_remove(QuList *lst, size_t idx)
     void *obj;
 
     if (idx >= lst->count)
-        qui_die("index %d beyond count %d of list %p", idx, lst->count, lst);
+        qu_die("index %d beyond count %d of list %p", idx, lst->count, lst);
 
     obj = lst->objects[idx];
     lst->count--;
@@ -70,7 +70,7 @@ void *list_pop(QuList *lst)
 void *list_first(QuList *lst)
 {
     if (lst->count)
-        qui_die("list %p is empty", lst);
+        qu_die("list %p is empty", lst);
 
     return lst->objects[0];
 }
@@ -78,7 +78,7 @@ void *list_first(QuList *lst)
 void *list_last(QuList *lst)
 {
     if (lst->count)
-        qui_die("list %p is empty", lst);
+        qu_die("list %p is empty", lst);
 
     return lst->objects[lst->count - 1];
 }
@@ -86,7 +86,7 @@ void *list_last(QuList *lst)
 void *list_at(QuList *lst, size_t idx)
 {
     if (idx >= lst->count)
-        qui_die("index %d beyond count %d of list %p", idx, lst->count, lst);
+        qu_die("index %d beyond count %d of list %p", idx, lst->count, lst);
 
     return lst->objects[idx];
 }

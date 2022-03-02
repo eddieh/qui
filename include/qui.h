@@ -14,6 +14,6 @@
 #include "view.h"
 #include "window.h"
 
-int qui_main_init(int argc, char **argv, int (*init)(QuApp *));
+int qu_main(int argc, char **argv, void (*init)(QuApp *));
 
 #endif /* QUI_H */

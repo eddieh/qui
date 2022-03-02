@@ -60,7 +60,7 @@ QuFont *QuFontA(const char *name, float size)
     CFRelease(cf_name);
 
     if (!ct_font)
-        qui_die("font not found");
+        qu_die("font not found");
 
     return _QuFontA_ct_font(ct_font);
 }

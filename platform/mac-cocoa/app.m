@@ -10,15 +10,14 @@ struct QuApp {
     QUIApplicationDelegate *_delegate;
 };
 
-int __app_default_init(QuApp *app);
-int __app_default_menu(QuApp *app);
-int __app_default_window(QuApp *app);
+void _app_default_menu(QuApp *app);
+void _app_default_window(QuApp *app);
 
 QuApp *QuAppA()
 {
     appref = malloc(sizeof(QuApp));
     if (!appref)
-        qui_die("out of memory");
+        qu_die("out of memory");
 
     appref->_pool = [NSAutoreleasePool new];
     appref->_app = [QUIApplication sharedApplication];
@@ -30,12 +29,11 @@ QuApp *QuAppA()
 
 void app_run(QuApp *a)
 {
-    // mac?
     if (!app_has_main_menu(a))
-        __app_default_menu(a);
+        _app_default_menu(a);
 
     if (!app_has_main_window(a))
-        __app_default_window(a);
+        _app_default_window(a);
 
     [a->_app run];
 }
@@ -56,18 +54,7 @@ int app_has_main_window(QuApp *a)
     return !![[a->_app windows] count];
 }
 
-int __app_default_init(QuApp *a)
-{
-    if (!__app_default_menu(a))
-        qui_die("failed to init default menu");
-
-    if (!__app_default_window(a))
-        qui_die("failed to init default window");
-
-    return 1;
-}
-
-int __app_default_menu(QuApp *a)
+void _app_default_menu(QuApp *a)
 {
     NSMenu *menubar, *appMenu;
     NSMenuItem *appMenuItem, *quitMenuItem;
@@ -87,30 +74,11 @@ int __app_default_menu(QuApp *a)
     [quitMenuItem setKeyEquivalent:@"q"];
 
     [a->_app setMainMenu:menubar];
-
-    return 1;
 }
 
-int __app_default_window(QuApp *a)
+void _app_default_window(QuApp *a)
 {
-    NSRect rect;
-    NSWindowStyleMask style;
-    NSWindow *win;
-
-    rect = NSMakeRect(100, 350, 400, 400);
-    style = NSWindowStyleMaskTitled;
-    style |= NSWindowStyleMaskClosable;
-
-    win = [[[NSWindow alloc]
-        initWithContentRect:rect
-        styleMask:style
-        backing:NSBackingStoreBuffered
-        defer:NO
-    ] autorelease];
-
-    [win center];
-    [win makeKeyAndOrderFront:nil];
-    [win makeMainWindow];
-
-    return 1;
+    QuWindow *win = QuWindowA();
+    window_center(win);
+    window_show(win);
 }
