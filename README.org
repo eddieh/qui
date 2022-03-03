@@ -62,10 +62,56 @@ int main(int argc, char **argv)
 }
 #+end_src
 
-On macOS this creates an program with a default dock icon, a default
+On macOS this creates a program with a default dock icon, a default
 menu bar, and a default window.
 
 [[./assets/simplest.png]]
 
 While the program is completely functional, it isn't very interesting.
-You can move the window and quit---that's about it.
+You can move the window and quit---that's about it. While a program
+that does nothing is nonsensical, it highlights the philosopy of QUI:
+quick and easy user interfaces with no bullshit!
+
+*** Complete hello, world
+
+QUI makes use of function pointers. Function pointers might sound
+scary, but in QUI it merely means you'll pass the names of some
+function you create to some QUI functions. In this "hello world"
+example the two user created functions are =btn_action_cb= and
+=app_init_cb=, the names can be anything, but their type signature
+must match the specified type signature.
+
+#+begin_src c
+#include "qui.h"
+#include <stdio.h>
+
+void btn_action_cb(QuButton *btn, QuEvent e)
+{
+    fprintf(stderr, "[action] %s\n", button_title(btn));
+}
+
+void app_init_cb(QuApp *app)
+{
+    QuWindow *win = QuWindowA();
+    QuButton *btn = QuButtonA();
+    window_set_frame(win, QuRectS(0, 0, 192, 96));
+    window_center(win);
+    view_set_frame(btn, QuRectS(32, 32, 128, 32));
+    button_set_action_func(btn, btn_action_cb);
+    button_set_title(btn, "hello, world!");
+    window_add_subview(win, btn);
+    window_show(win);
+}
+
+int main(int argc, char **argv)
+{
+    return qu_main(argc, argv, app_init_cb);
+}
+#+end_src
+
+This creates a program with a small window and a single button titled
+"hello, world!"
+
+[[./assets/hello.png]]
+
+Quick. Easy. Couldn't be much simpler. That's the QUI way.

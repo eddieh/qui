@@ -18,6 +18,7 @@ test/list
 
 # examples
 example/simplest
+example/hello
 example/window
 example/window-color
 example/window-frame
