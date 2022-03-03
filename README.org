@@ -16,38 +16,25 @@ The only documentation is this README. The README contains everything
 you'll ever need when using QUI: how to use it, how to build it, how
 to hack it, a tutorial, and a complete reference.
 
-** Library conventions
+** Building
 
-Types are prefixed with =Qu=. There are opaque object references
-(QuApp, QuWindow, QuButton, etc.) and small structs (QuRect, QuPoint,
-QuRGBA, etc.).
+Only macOS is supported at this time. You will need either Xcode or
+the CLI developer tools.
 
-Opaque references are malloc'd with a constructor function that ends
-with =A= and you're responsible for freeing the returned reference.
-Small structs are created on the stack and no manual memory management
-is needed, they end with a =S=.
+Just type =make= in the =qui= project directory.
 
-#+begin_src c
-  QuApp *app = QuAppA(); // A = allocate in the heap
-  QuRect rect = QuRectS(); // S = stack allocation
+#+begin_src
+$ make
 #+end_src
 
-Types are names that follow the convention =Qu=​/TypeName/ where =Qu=
-is the prefix and /TypeName/ is App, Window, View, etc. in [[https://wiki.c2.com/?PascalCase][PascalCase]].
+This will produce a static library =libqui.a= in the project
+directory.
 
-Functions begin with the lowercase type name without the prefix and
-take an object of the named type as the first argument.
+** Usage
 
-#+begin_src c
-void button_set_title(QuButton *btn, const char *title);
-void path_line_to(QuPath *path, QuPoint pos);
-#+end_src
-
-The exceptions are graphics context functions like =fill_path=,
-=stroke_rect=, and others when the names are not likely to collide;
-functions that do not operate on QUI types like =qu_main=; and utility
-functions that would otherwise be clunky if the names were too long
-like =qu_w= and =qu_midx=.
+Copy =libqui.a= and the headers in the =include= directory to a
+project. Tell the build system where to find the headers and library
+and direct the linker to link =libqui=.
 
 ** Hello, QUI
 
@@ -115,3 +102,36 @@ This creates a program with a small window and a single button titled
 [[./assets/hello.png]]
 
 Quick. Easy. Couldn't be much simpler. That's the QUI way.
+
+** Library conventions
+
+Types are prefixed with =Qu=. There are opaque object references
+(QuApp, QuWindow, QuButton, etc.) and small structs (QuRect, QuPoint,
+QuRGBA, etc.).
+
+Opaque references are malloc'd with a constructor function that ends
+with =A= and you're responsible for freeing the returned reference.
+Small structs are created on the stack and no manual memory management
+is needed, they end with a =S=.
+
+#+begin_src c
+  QuApp *app = QuAppA(); // A = allocate in the heap
+  QuRect rect = QuRectS(); // S = stack allocation
+#+end_src
+
+Types are names that follow the convention =QuTypeName= where =Qu=
+is the prefix and /TypeName/ is App, Window, View, etc. in [[https://wiki.c2.com/?PascalCase][PascalCase]].
+
+Functions begin with the lowercase type name without the prefix and
+take an object of the named type as the first argument.
+
+#+begin_src c
+void button_set_title(QuButton *btn, const char *title);
+void path_line_to(QuPath *path, QuPoint pos);
+#+end_src
+
+The exceptions are graphics context functions like =fill_path=,
+=stroke_rect=, and others when the names are not likely to collide;
+functions that do not operate on QUI types like =qu_main=; and utility
+functions that would otherwise be clunky if the names were too long
+like =qu_w= and =qu_midx=.
