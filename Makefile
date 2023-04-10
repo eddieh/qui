@@ -106,6 +106,20 @@ cflags += $($(*)-cflags) $(CPPFLAGS) $(CFLAGS)
 tags TAGS t: FORCE
 	scripts/tags
 
+check: $(PROGRAMS)
+	example/simplest
+	example/hello
+	example/window
+	example/window-color
+	example/window-frame
+	example/window-resizable
+	example/draw
+	example/text
+	example/button
+	example/subview
+	example/window-event
+	example/path
+
 clean:
 	@for dir in $(MODULES); do ${MAKE} clean -C $$dir; exit_status=$$?; \
 	if [ $$exit_status -ne 0 ]; then exit $$exit_status; fi; done
